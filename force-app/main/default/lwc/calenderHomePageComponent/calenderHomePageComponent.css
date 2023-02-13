@@ -1,0 +1,157 @@
+.weekdays,.dates{
+    display: grid;
+    grid-template-columns: repeat(7,1fr);
+    border: 1px solid grey;
+   
+
+   
+}
+.weekday{
+    width: 98%;
+    height: 70px;
+    border: 1px solid rgb(112, 112, 184);
+    background-color: aqua;
+    font-size: large;
+    font-weight: 500;
+    text-align: center;
+    padding-top: 20px;
+    cursor: pointer;
+    transition: background-color 0.5s ease-in-out;
+}
+.weekday:hover{
+    background-color: #ddd;
+}
+.date{
+    width: 98%;
+    height: 70px;
+    border: 1px solid grey;
+    background-color: rgb(176, 184, 112);
+    font-size: large;
+    font-weight: 500;
+    text-align: center;
+    padding-top: 20px;
+    cursor: pointer;
+    transition: background-color 0.5s ease-in-out;
+}
+
+.date:hover {
+    background-color: #ddd;
+}
+.dateEmpty{
+    background-color: whitesmoke;
+    border:  1px solid grey;
+}
+.calendar-header{
+    border: 1px solid black;
+    
+}
+.previous-month{
+    width: 40px;
+    height: 30px;
+    background-color: blueviolet;
+    margin-left: 40%;
+    margin-bottom: 10px;
+    margin-top: 15px;
+    
+}
+.month-year{
+    font-size: large;
+    color: brown;
+    margin-left: 45%;
+    margin-top: -37px;
+    margin-bottom: 6px;
+}
+.next-month{
+    width: 40px;
+    height: 30px;
+    background-color: blueviolet;
+    margin-left: 55%;
+    margin-top: -35px;
+}
+
+.modal-backdrop {
+    background-color: rgba(0, 0, 0, 0.3);
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .modal-content {
+    background-color: white;
+    width: 400px;
+    height: 250px;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    display: flex;
+  }
+  .modal-content_1 {
+    background-color: white;
+    width: 400px;
+    height: 250px;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  }
+  .box1{
+    width: 45%;
+    height: 180px;
+    border: 1px solid grey;
+    border-radius: 5px;
+    background-color: darkgrey;
+    cursor: pointer;
+  }
+
+.box1:hover{
+    background-color: aliceblue;
+  }
+  .box2{
+    width: 45%;
+    height: 180px;
+    border: 1px solid grey;
+    border-radius: 5px;
+    margin-left: 30px;
+    background-color: darkgrey;
+    cursor: pointer;
+}
+.box2:hover{
+    background-color: aliceblue;
+  }
+.heading{  
+margin-top: 75px;
+margin-left: 17%;
+font-size: large;
+color: brown;
+cursor: pointer;
+}
+  .close{
+margin-top: 206px;
+margin-left: -254px;
+width: 100px;
+height: 40px;
+border-radius: 10px;
+background-color: blue;
+  }
+
+  .todayDate{
+    height: 30px;
+  }
+  .picklist_outer{
+    display: flex;
+    column-gap: 34%;
+  }
+  .startPicklist{
+    width: 100px;
+   
+  }
+  .attendees{
+    width: 280px;
+  }
+  .attendees_outer{
+    display: flex;
+  }

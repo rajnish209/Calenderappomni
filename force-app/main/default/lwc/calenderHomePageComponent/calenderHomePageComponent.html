@@ -1,0 +1,115 @@
+<template>
+    <div class="calendar">
+        <div class="calendar-header">
+            <button class="previous-month"  onclick={previousMonth}>&lt;</button>
+            <div class="month-year">{displayMonth} {displayYear}</div>
+            <button class="next-month" onclick={nextMonth}>&gt;</button>
+        </div>
+        <div class="calendar-body">
+            <div class="weekdays">
+                <template for:each={weekdays} for:item="weekday">
+                    <div key={weekday} class="weekday">{weekday}</div>
+                </template>
+            </div>
+            <div class="dates">
+            <template for:each={dates} for:item="date">
+                <!-- <template if:false={date.flag}>
+                    <div key={date} class="dateEmpty">{date.day}</div> 
+                </template> -->
+                    <div data-id={date.day} key={date} class="date"  onclick={choosedate}>{date.day}</div>            
+        </template>
+            </div>
+        </div>
+    </div>
+    <template if:true={val}>
+        <div class="modal-backdrop" onclick={closeModal}>
+            <div class="modal-content">
+             <div class="box1" onclick={roomnumber1}>
+                <h1 class="heading">Meeting Room1</h1>
+             </div>
+             <div class="box2" onclick={roomnumber2}>
+                <h1 class="heading">Meeting Room2</h1>
+             </div>
+              <!-- <button onclick={closeModal}>Close</button> -->
+            </div>
+            <div><button  class="close" onclick={closeModal}>Close</button></div>
+          </div>
+    </template>
+    <template if:true={room1}>
+        <div class="modal-backdrop" >
+            <div class="modal-content_1">
+               <h1 class="todayDate">Schedule Meeting on : {finaldateformodal}</h1>
+               <div class="picklist_outer">
+               <lightning-combobox
+               class="startPicklist"
+               label="Start Time"
+               value={value}
+               placeholder="Select Start Time"
+               options={options}
+               onchange={handleChange} ></lightning-combobox>
+
+               <lightning-combobox
+               class="startPicklist"
+               label="End Time"
+               value={value}
+               placeholder="Select End Time"
+               options={endOptions}
+               onchange={handleChange} ></lightning-combobox>
+            </div>
+            <div class="attendees_outer">
+            <lightning-combobox
+            class="attendees"
+            label="Add Attendees"
+            value={value}
+            placeholder="Add Attendees"
+            options={Attendees}
+            onchange={handleChange} ></lightning-combobox>
+            <lightning-icon size="x-small" class="addIcon" icon-name="utility:add"></lightning-icon>
+        </div>
+            </div>
+            <div><button  class="close" onclick={closeModalnext}>Close</button></div>
+        </div>
+        
+    </template>
+    <template if:true={room2} >
+        <div class="modal-backdrop" onclick={closeModalnextagain}>
+            <div class="modal-content_1">
+                <h1>I am Room 2</h1>
+            </div>
+            <div>
+                <button  class="close" onclick={closeModalnextagain}>Close</button>
+            </div>
+        </div> 
+    </template>
+</template>
+
+
+
+
+
+
+
+<!--<template>
+    <table class="calendar">
+        <thead>
+            <tr>
+                <th>Sun</th>
+                <th>Mon</th>
+                <th>Tue</th>
+                <th>Wed</th>
+                <th>Thu</th>
+                <th>Fri</th>
+                <th>Sat</th>
+            </tr>
+        </thead>
+        <tbody>
+            <template for:each={weeks} for:item="week">
+                <tr key={week}>
+                    <template for:each={week} for:item="day">
+                        <td key={day}>{day}</td>
+                    </template>
+                </tr>
+            </template>
+        </tbody>
+    </table>
+</template>-->

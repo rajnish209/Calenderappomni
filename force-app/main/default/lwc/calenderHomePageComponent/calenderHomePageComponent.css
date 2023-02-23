@@ -1,16 +1,13 @@
 .weekdays,.dates{
     display: grid;
     grid-template-columns: repeat(7,1fr);
-    border: 1px solid grey;
-   
-
-   
+    /* border: 1px solid grey; */
 }
 .weekday{
     width: 98%;
     height: 70px;
-    border: 1px solid rgb(112, 112, 184);
-    background-color: aqua;
+    /* border: 1px solid rgb(112, 112, 184); */
+    background-color: #8d95c8;;
     font-size: large;
     font-weight: 500;
     text-align: center;
@@ -19,55 +16,71 @@
     transition: background-color 0.5s ease-in-out;
 }
 .weekday:hover{
-    background-color: #ddd;
+    /* background-color: #1798c1; */
+    background-color: #9FD0EC;;
 }
 .date{
     width: 98%;
-    height: 70px;
+    height: 100px;
     border: 1px solid grey;
-    background-color: rgb(176, 184, 112);
+    background-color: whitesmoke;
     font-size: large;
     font-weight: 500;
     text-align: center;
-    padding-top: 20px;
+    padding-top: 35px;
     cursor: pointer;
     transition: background-color 0.5s ease-in-out;
 }
 
 .date:hover {
-    background-color: #ddd;
+    /* background-color: #1798c1; */
+    background-color: #9FD0EC;
 }
 .dateEmpty{
     background-color: whitesmoke;
-    border:  1px solid grey;
+    /* border:  1px solid grey; */
 }
-.calendar-header{
-    border: 1px solid black;
+ .calendar-header{
+    /* border: 1px solid black;  */
+    display: flex;
+    padding-bottom:10px;
     
-}
+} 
 .previous-month{
     width: 40px;
     height: 30px;
     background-color: blueviolet;
-    margin-left: 40%;
-    margin-bottom: 10px;
-    margin-top: 15px;
+    /* margin-left: 81%; */
+    margin-bottom: 0px;
+    margin-top: -28px;
     
 }
 .month-year{
     font-size: large;
     color: brown;
-    margin-left: 45%;
-    margin-top: -37px;
-    margin-bottom: 6px;
+    margin-left: 0%;
+    margin-top: 21px;
+    margin-bottom: 0px;
+    /* border: 1px solid black; */
 }
 .next-month{
     width: 40px;
     height: 30px;
     background-color: blueviolet;
-    margin-left: 55%;
-    margin-top: -35px;
+    /* margin-left: 8%; */
+    margin-top: 21px;
 }
+/* .hide{
+  margin-left: 32%;
+}
+.show{
+  margin-left: 1%;
+}
+.monthsDiv{
+  border: 1px solid black; 
+  margin-top: -3%;
+  padding: 4px 0 11px 0;
+} */
 
 .modal-backdrop {
     background-color: rgba(0, 0, 0, 0.3);
@@ -92,8 +105,16 @@
   }
   .modal-content_1 {
     background-color: white;
-    width: 400px;
-    height: 250px;
+    width: 58%;
+    /* height: 30rem; */
+    padding: 1rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  }
+  .modal-content_2 {
+    background-color: white;
+    width: 58%;
+    /* height: 30rem; */
     padding: 1rem;
     border-radius: 0.5rem;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
@@ -129,29 +150,277 @@ font-size: large;
 color: brown;
 cursor: pointer;
 }
-  .close{
-margin-top: 206px;
-margin-left: -254px;
-width: 100px;
-height: 40px;
-border-radius: 10px;
-background-color: blue;
+ 
+.close{
+margin-top: -152px;
+font-size: 39px;
+transform: rotate(45deg);
+background: rgba(0,0,0,-0.6);
+border: none;
+color: whitesmoke;
   }
+  /* .close_1{
+    margin-top: -290px;
+    font-size: 39px;
+    transform: rotate(45deg);
+    background: rgba(0,0,0,-0.6);
+    border: none;
+    color: whitesmoke;
+      } */
+
+/* .close_2{
+  margin-top: -290px;
+  font-size: 39px;
+  transform: rotate(45deg);
+  background: rgba(0,0,0,-0.6);
+  border: none;
+  color: whitesmoke;
+  } */
 
   .todayDate{
     height: 30px;
+    margin-top: 3%;
+    font-size: large;
+
   }
   .picklist_outer{
     display: flex;
-    column-gap: 34%;
+    column-gap: 21%;
+    padding: 1% 0px 4% 0px
   }
   .startPicklist{
-    width: 100px;
+    width: 128%;
    
   }
   .attendees{
-    width: 280px;
+    width: 56%;
   }
   .attendees_outer{
     display: flex;
   }
+  .addIcon{
+    margin-top: 8px;
+    margin-left: 8px;
+    color: whitesmoke;
+    cursor: pointer;
+  }
+  .addIcon_outer{
+    border: 1px solid gainsboro;
+    margin-top: 24px;
+    width: 38px;
+    background: aliceblue;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  .addIcon_outer:hover{
+    color:aqua
+  }
+  /* .slds-button_brand{
+    margin-left: 90%;
+    margin-top: 2%;
+  } */
+  .descDiv{
+    margin-top:5%;
+  }
+  .desc{
+    height: 6rem;
+  }
+  .checkeventbutton{
+    width: 30px;
+    height: 30px;
+  }
+
+  .bookRoom{
+    text-align: center;
+    font-size: large;
+    font-style: oblique;
+  }
+
+  :host {
+    display: block;
+}
+
+.red {
+    color: red;
+}
+
+.blue {
+    color: blue;
+}
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+  }
+  
+  .tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+  
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+  }
+  
+  .tooltip:hover .tooltiptext {
+    visibility: visible;
+  }
+
+  .eventShow{
+    /* border: 1px solid red; */
+    padding: 11px 11px 11px 12px;
+    margin-top: 2%;
+  }
+
+  .innerEventShow{
+    border-left: 3px solid rosybrown;
+    border-top: 2px solid beige;
+    border-right: 2px solid beige;
+    border-bottom: 2px solid beige;
+    border-radius: 13px;
+    padding: 7px 0px 0px 10px;
+    /* height: 62px; */
+    font-size: x-large;
+
+  }
+
+  .eachSub{
+    font-size: medium;
+  
+  }
+  .eachTime{
+    font-size: medium;
+    margin-left: 200px;
+    margin-top: -25px;
+  }
+
+  @media (min-width: 1200px) {
+    .hide{
+      margin-left: 68%; 
+    }
+    .show{
+      margin-left: 6%;
+      margin-top: 3%;
+    }
+    .month-year{
+      margin-left: 0%;
+      text-align: center;
+      width: 15%;
+      /* border: 1px solid black; */
+    }
+    .monthsDiv{
+      /* border: 1px solid black; */
+      width: 43%;
+      /* margin-top: -3%;
+      padding: 4px 0 11px 0; */
+    }
+    .firstDivMonth{
+      /* border: 1px solid black; */
+      width: 42%;
+    }
+    .next-month{
+      width: 40px;
+      height: 30px;
+      background-color: blueviolet;
+      margin-left: 0%;
+      margin-top: 21px;
+  }
+    .previous-month{
+      margin-left: 93%;
+    }
+  .close_1{
+    margin-top: -290px;
+    font-size: 39px;
+    transform: rotate(45deg);
+    background: rgba(0,0,0,-0.6);
+    border: none;
+    color: whitesmoke;
+    }
+
+    .close_2{
+      margin-top: -290px;
+      font-size: 39px;
+      transform: rotate(45deg);
+      background: rgba(0,0,0,-0.6);
+      border: none;
+      color: whitesmoke;
+      }
+
+ .slds-button_brand{
+    margin-left: 90%;
+    margin-top: 2%;
+  }
+ 
+  
+  }
+
+  @media (min-width: 1440px) {
+    .hide{
+      margin-left: 72%; 
+    }
+    .show{
+      margin-left: 6%;
+      margin-top: 3%;
+    }
+    .monthsDiv{
+      /* border: 1px solid black;   */
+      margin-left: 0%;
+       margin-top: 0%;
+      
+    }
+    .firstDivMonth{
+      /* border: 1px solid black;  */
+      width: 43%;
+    }
+    .month-year{
+      margin-left: 0%;
+      width: 17%;
+      text-align: center;
+      /* border: 1px solid black; */
+    }
+    .previous-month{
+      margin-left: 95%;
+      margin-top: -34px;
+    }
+   
+    .close_1{
+      margin-top: -311px;
+      font-size: 39px;
+      transform: rotate(45deg);
+      background: rgba(0,0,0,-0.6);
+      border: none;
+      color: whitesmoke;
+      }
+
+      .close_2{
+        margin-top: -311px;
+        font-size: 39px;
+        transform: rotate(45deg);
+        background: rgba(0,0,0,-0.6);
+        border: none;
+        color: whitesmoke;
+        }
+  
+   .slds-button_brand{
+      margin-left: 93%;
+      margin-top: 2%;
+    }
+   
+    
+    }
+.sub{
+  height: 10px;
+  /* margin-left: 27%; */
+  margin-top: -19%;
+  font-size: small;
+  TEXT-ALIGN: left;
+  width: 42%;
+  /* border: 1px solid black; */
+  color: crimson;
+}

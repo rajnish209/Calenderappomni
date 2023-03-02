@@ -96,8 +96,8 @@
 
   .modal-content {
     background-color: white;
-    width: 400px;
-    height: 250px;
+    width: 52%;
+    height: 177px;
     padding: 1rem;
     border-radius: 0.5rem;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
@@ -457,4 +457,56 @@ color: whitesmoke;
 }
 .sub[data-status="Pending"]:hover{
   background-color:  #f5993d;
+}
+
+.text{
+  text-align: center;
+  font-weight: 500;
+}
+
+.white-icon{
+  width: 28%;
+  margin-left: 43%;
+  margin-top: 5%;
+  background-color: #9FD0EC;
+
+}
+
+.firstBox{
+  /* border: 1px solid red; */
+  width: 48%;
+  background: #9FD0EC;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.firstBox:hover {
+  background-color: #5cb85c;
+}
+
+.firstBox:hover .white-icon{
+  background-color: #5cb85c;
+}
+
+.firstBox:hover .text{
+  color: white;
+}
+
+.firstTwoBox{
+  display: flex;
+  /* border: 1px solid black; */
+  height: 6rem;
+  border-radius: 8px;
+  column-gap: 3%;
+  cursor: pointer;
+  }
+
+  .outerBox{
+    /* border: 1px solid black; */
+    width: 102%;
+    margin: auto;
+    /* height: 150px; */
+    padding: 2%;
+    border-radius: 5px;
+    background: white;
 }

@@ -64,6 +64,18 @@ background: #8d95c8;
     font-weight: 500;
 }
 
+.firstBox:hover {
+    background-color: #5cb85c;
+  }
+  
+  .firstBox:hover .white-icon{
+    background-color: #5cb85c;
+  }
+  
+  .firstBox:hover .text{
+    color: white;
+  }
+
 .zoom{
     width: 18%;
     margin-left: 43%;

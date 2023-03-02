@@ -93,7 +93,7 @@ get options() {
          return arr;
     }
 
-    @track subject;
+@track subject;
 @track start;
 @track end;
 @track totalattend =[];
@@ -169,7 +169,8 @@ get options() {
    
  }
  handleredirectcalender(){
-    window.location.assign("https://d2v000002fkjpeas--partial.sandbox.my.salesforce-sites.com/CalenderHomePage");
+    window.open("https://d2v000002fkjpeas--partial.sandbox.my.salesforce-sites.com/CalenderHomePage","_blank");
+    //window.location.assign("https://d2v000002fkjpeas--partial.sandbox.my.salesforce-sites.com/CalenderHomePage");
    
  }
 

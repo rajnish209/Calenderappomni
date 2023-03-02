@@ -19,28 +19,22 @@
             </div>
             <div class="dates">
             <template for:each={dates} for:item="date">
-                <!-- <template if:false={date.flag}>
-                    <div key={date} class="dateEmpty">{date.day}</div> 
-                </template>  -->
-                     <!-- <div data-id={date.day} key={date} class="date" onmouseover={showEvent} onclick={choosedate} onmouseout={hideEvent}>
-                        {date.day}  
-                                                            
-                    </div>   -->
-                    <div key={date} class="date"  onclick={choosedate}>
-                        <div data-id={date.day}> {date.day}  </div>
-                        <!-- <h1>{date.valuess}</h1> -->
+               
+                    <div key={date.day} class="date"  onclick={choosedate}>
+                        <div data-id={date.day} > {date.day}  </div>
+                        
                         <template if:true={eventCheck}>
+                            <div class="outerSubjectDiv">
                         <template for:each={date.valuess}  for:item="subbb">
-                            <p class="sub" key={subbb}>{subbb}</p>
-                        </template>
-                    </template>
-                         <!-- <template for:each={subjec} for:item="value"> -->
-                            <!-- <h1 key={value.day} >{value.subj}</h1> -->
-                           <!--<template if:true={value.temps}>
-                                
-                            </template> --> 
+                            <div data-status={subbb.recStatus} key ={subbb} class="sub">
+                           
+                            {subbb.recSubject}
                             
-                         <!-- </template>  -->
+                        </div>
+                        </template>
+                    </div>
+                    </template>
+                    
                         
                     </div>           
 
@@ -49,28 +43,23 @@
             </div>
         </div>
     </div>
-    <!-- <template if:true={showHoverEvent}>
-    <div class="eventShow">
-        <div class="innerEventShow">
-                 <span >{finalval}</span>
-                <span style="margin-left: 40px;">{finalTime}</span>                            
-                <template for:each={finalval} for:item="val">
-                    <p class="eachSub" key={val.Id}>{val.subjectss}</p>
-                    <p class="eachTime" key={val.Id}>{val.time}</p>
-                </template>
-    </div>
-    </div>
-</template> -->
+  
     <template if:true={val}>
         <div class="modal-backdrop">
             <div class="modal-content">
-             <div class="box1" onclick={roomnumber1}>
-                <h1 class="heading">Reserve Room</h1>
-             </div>
-             <div class="box2" onclick={roomnumber2}>
-                <h1 class="heading">Zoom Meeting</h1>
-             </div>
-              <!-- <button onclick={closeModal}>Close</button> -->
+
+                <div class="outerBox">
+                    <div class="firstTwoBox">
+                        <div class="firstBox" onclick={roomnumber1}>
+                            <lightning-icon icon-name="standard:shift" class="white-icon" size="large"></lightning-icon>
+                            <p class="text">Reserve Kailasha</p>
+                        </div>
+                        <div class="firstBox" onclick={roomnumber2}>
+                            <lightning-icon icon-name="standard:event" class="white-icon" size="large"></lightning-icon>
+                            <p class="text">Home Page</p>
+                        </div>
+                    </div>
+                </div>             
             </div>
             <div><button  class="close" onclick={closeModal}>+</button></div>
           </div>
@@ -79,7 +68,7 @@
         <div class="modal-backdrop" >
             <div class="modal-content_1">
                 <div class="bookRoom">
-                    <h1>Book Conference Room</h1>
+                    <h1>Book Kailasha</h1>
                 </div>
                 <div>
                 <lightning-input label="Subject" placeholder="Subject" type="text" onchange={handlesubject}></lightning-input>
@@ -105,22 +94,11 @@
                onchange={handleChangeEnd} ></lightning-combobox>
             </div>
 
-            <!-- <div class="attendees_outer">
-            <lightning-combobox
-            class="attendees"
-            label="Add Attendees"
-            value={value}
-            placeholder="Add Attendees"
-            options={valuedata}
-            onchange={handleChangeattendees} ></lightning-combobox> -->
+           
             <lightning-input label="Name" placeholder="Enter Name" type="text" onchange={handleName}></lightning-input>
             <lightning-input label="Email" placeholder="Email" type="email" onchange={handleEmail}></lightning-input>
 
-            <!-- <div class="addIcon_outer">
-            <lightning-icon size="x-small" class="addIcon" icon-name="utility:add" onclick={handleAddAttendees}></lightning-icon>
-        </div> -->
-
-        <!-- </div> -->
+          
 
         <div class="descDiv">
             <lightning-textarea name="input2" label="Description" onchange={handledescription}></lightning-textarea>

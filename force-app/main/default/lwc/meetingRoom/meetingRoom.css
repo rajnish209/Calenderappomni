@@ -1,0 +1,238 @@
+.outerCard{
+    width: 100%;
+    /* height: 17rem; */
+    /* border: 1px solid black; */
+    background: aliceblue;
+}
+
+.logoImg{
+    width: 20%;
+    /* margin-left: 37.5%; */
+    margin-top: 1%;
+    
+}
+
+.heading{
+    font-size: x-large;
+    color: blue;
+    text-align: center;
+}
+
+.subHeading{
+    padding: 5px 0px 60px 0px;
+    text-align: center;
+    font-size: initial;
+    color: cornflowerblue;
+}
+
+.outerBox{
+    /* border: 1px solid black; */
+    width: 52%;
+    margin: auto;
+    /* height: 150px; */
+    padding: 2%;
+    border-radius: 5px;
+    background: white;
+}
+.firstTwoBox{
+display: flex;
+/* border: 1px solid black; */
+height: 6rem;
+border-radius: 8px;
+column-gap: 3%;
+cursor: pointer;
+}
+
+.firstBox{
+    /* border: 1px solid red; */
+    width: 48%;
+    background: #9FD0EC;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+/* .lastBox{
+border: 1px solid black;
+height: 6rem;
+border-radius: 8px;
+margin-top: 2%;
+background: #8d95c8;
+} */
+
+.text{
+    text-align: center;
+    font-weight: 500;
+}
+
+.zoom{
+    width: 18%;
+    margin-left: 43%;
+    margin-top: 3%;
+}
+.white-icon{
+    width: 28%;
+    margin-left: 43%;
+    margin-top: 5%;
+    background-color: #9FD0EC;
+
+}
+
+@media (min-width: 1200px) {
+    .lastBox{
+        /* border: 1px solid black; */
+        height: 8rem;
+        border-radius: 8px;
+        margin-top: 3%;
+        background: #8d95c8;
+        cursor: pointer;
+        }
+.outerCard{
+        height: 39rem;
+}
+.logoImg{
+    margin-left: 39.5%;
+    cursor: pointer;
+}
+.close_1{
+    margin-top: -265px;
+    font-size: 39px;
+    transform: rotate(45deg);
+    background: rgba(0,0,0,-0.6);
+    border: none;
+    color: whitesmoke;
+      }
+.slds-button_brand{
+    margin-left: 90%;
+    margin-top: 2%;
+    }
+
+    
+}
+  
+@media (min-width: 1440px) {
+    .lastBox{
+        /* border: 1px solid black; */
+        height: 10rem;
+        border-radius: 8px;
+        margin-top: 3%;
+        background: #8d95c8;
+        cursor: pointer;
+        }
+
+        .outerCard{
+            height: 58rem;
+    }
+    .zoom{
+        margin-left: 41%;
+        cursor: pointer;
+    }
+    .logoImg{
+        margin-left: 39.5%;
+    }
+    .close_1{
+        margin-top: -290px;
+        font-size: 39px;
+        transform: rotate(45deg);
+        background: rgba(0,0,0,-0.6);
+        border: none;
+        color: whitesmoke;
+          }
+
+    .slds-button_brand{
+        margin-left: 93%;
+        margin-top: 2%;
+    }
+  
+}
+
+.modal-backdrop {
+    background-color: rgba(0, 0, 0, 0.3);
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    
+  }
+
+  .modal-content {
+    background-color: white;
+    width: 400px;
+    height: 250px;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    display: flex;
+  }
+  .modal-content_1 {
+    background-color: white;
+    width: 58%;
+    /* height: 30rem; */
+    padding: 1rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  }
+  .modal-content_2 {
+    background-color: white;
+    width: 58%;
+    /* height: 30rem; */
+    padding: 1rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  }
+
+  /* .close{
+    margin-top: -152px;
+    font-size: 39px;
+    transform: rotate(45deg);
+    background: rgba(0,0,0,-0.6);
+    border: none;
+    color: whitesmoke;
+      } */
+  
+
+          .todayDate{
+            height: 30px;
+            margin-top: 3%;
+            font-size: large;
+        
+          }
+          .picklist_outer{
+            display: flex;
+            column-gap: 21%;
+            padding: 1% 0px 4% 0px
+          }
+          .startPicklist{
+            width: 128%;
+           
+          }
+          .attendees{
+            width: 56%;
+          }
+.attendees_outer{
+    display: flex;
+}
+/* .slds-button_brand{
+    margin-left: 90%;
+    margin-top: 2%;
+} */
+
+.calender{
+    width: 30%;
+    border-radius: 4px;
+    height: 25px;
+    border: 1px solid lightgrey;
+}
+.meetingTime{
+    margin-top: 3%;
+    margin-bottom: 0.5%;
+}
+.bookRoom{
+    text-align: center;
+    font-size: large;
+    font-style: oblique;
+  }

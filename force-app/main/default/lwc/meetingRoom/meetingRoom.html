@@ -1,0 +1,85 @@
+<template>
+  
+        <div class="outerCard">
+            <div class="logo">
+                <img class="logoImg" src={logo} alt="#"/>
+                <h1 class="heading">OmniCloud Meeting Room</h1>
+                <p class="subHeading">OmniCloud - For internal use only.</p>
+            </div>
+
+            <div class="outerBox">
+                <div class="firstTwoBox">
+                    <div class="firstBox" onclick={handleFirst}>
+                        <!-- <img class="zoom" src={ReserveEvent} alt="#"/> -->
+                        <lightning-icon icon-name="standard:shift" class="white-icon" size="large"></lightning-icon>
+                        <p class="text">Reserve Room</p>
+                    </div>
+                    <div class="firstBox" onclick={handleredirectcalender}>
+                        <lightning-icon icon-name="standard:event" class="white-icon" size="large"></lightning-icon>
+                        <p class="text" >Visit Calender</p>
+                    </div>
+                </div>
+                <div class="lastBox" onclick={handleLast}>
+                    <img class="zoom" src={Feedback} alt="#"/>
+                    <p class="text">Give Feedback</p>
+                </div>
+            </div>
+        </div>
+  
+    <template if:true={first} >
+        <div class="modal-backdrop" >
+            <div class="modal-content_1">
+                <div class="bookRoom">
+                    <h1>Book Conference Room</h1>
+                </div>
+                <div>
+                <lightning-input label="Subject" placeholder="Subject" type="text" onchange={handlesubject}></lightning-input>
+                </div>
+               <!-- <h1 class="todayDate">Date : {finaldateformodal}</h1> -->
+               <p class="meetingTime">Meeting Time</p>
+               <input  class="calender" type="date" name="date_picker" value="2023-02-22" onclick={handledate} required>
+               <div class="picklist_outer">
+               <lightning-combobox
+               class="startPicklist"
+               label="Start Time"
+               value={value}
+               placeholder="Start Time"
+               options={options}
+               onchange={handleChangestart} ></lightning-combobox>
+         
+
+               <lightning-combobox
+               class="startPicklist"
+               label="End Time"
+               value={value}
+               placeholder="End Time"
+               options={endOptions}
+               onchange={handleChangeEnd} ></lightning-combobox>
+            </div>
+
+            <div class="attendees_outer">
+            <lightning-combobox
+            class="attendees"
+            label="Add Attendees"
+            value={value}
+            placeholder="Add Attendees"
+            options={valuedata}
+            onchange={handleChangeattendees} ></lightning-combobox>
+
+            <!-- <div class="addIcon_outer">
+            <lightning-icon size="x-small" class="addIcon" icon-name="utility:add" onclick={handleAddAttendees}></lightning-icon>
+        </div> -->
+
+        </div>
+
+        <div class="descDiv">
+            <lightning-textarea name="input2" label="Description" onchange={handledescription}></lightning-textarea>
+        </div>
+        <button class="slds-button slds-button_brand" onclick={handlesubmit}>Submit</button>
+            </div>
+            <div><button  class="close_1" onclick={closeModalnext}>+</button></div>
+        </div>
+    </template>
+                <!-- Second box -->
+   
+</template>

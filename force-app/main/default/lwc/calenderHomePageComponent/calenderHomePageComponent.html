@@ -1,9 +1,15 @@
 <template>
     <div class="calendar">
         <div class="calendar-header">
+        <div class="firstDivMonth">
+            <button class="slds-button slds-button_success show" onclick={showAllEvent}>Show Events</button>
             <button class="previous-month"  onclick={previousMonth}>&lt;</button>
+        </div>
             <div class="month-year">{displayMonth} {displayYear}</div>
+        <div class="monthsDiv">
             <button class="next-month" onclick={nextMonth}>&gt;</button>
+            <button class="slds-button slds-button_success hide" onclick={hideAllEvent}>Hide Events</button>
+        </div>
         </div>
         <div class="calendar-body">
             <div class="weekdays">
@@ -15,69 +21,175 @@
             <template for:each={dates} for:item="date">
                 <!-- <template if:false={date.flag}>
                     <div key={date} class="dateEmpty">{date.day}</div> 
-                </template> -->
-                    <div data-id={date.day} key={date} class="date"  onclick={choosedate}>{date.day}</div>            
+                </template>  -->
+                     <!-- <div data-id={date.day} key={date} class="date" onmouseover={showEvent} onclick={choosedate} onmouseout={hideEvent}>
+                        {date.day}  
+                                                            
+                    </div>   -->
+                    <div key={date.day} class="date"  onclick={choosedate}>
+                        <div data-id={date.day} > {date.day}  </div>
+                        <!-- <h1>{date.valuess}</h1> -->
+                        <template if:true={eventCheck}>
+                            <div class="outerSubjectDiv">
+                        <template for:each={date.valuess}  for:item="subbb">
+                            <div data-status={subbb.recStatus} key ={subbb} class="sub">
+                            <!-- <p class="sub">{subbb}</p> -->
+                            {subbb.recSubject}
+                            
+                        </div>
+                        </template>
+                    </div>
+                    </template>
+                         <!-- <template for:each={subjec} for:item="value"> -->
+                            <!-- <h1 key={value.day} >{value.subj}</h1> -->
+                           <!--<template if:true={value.temps}>
+                                
+                            </template> --> 
+                            
+                         <!-- </template>  -->
+                        
+                    </div>           
+
         </template>
+        
             </div>
         </div>
     </div>
+    <!-- <template if:true={showHoverEvent}>
+    <div class="eventShow">
+        <div class="innerEventShow">
+                 <span >{finalval}</span>
+                <span style="margin-left: 40px;">{finalTime}</span>                            
+                <template for:each={finalval} for:item="val">
+                    <p class="eachSub" key={val.Id}>{val.subjectss}</p>
+                    <p class="eachTime" key={val.Id}>{val.time}</p>
+                </template>
+    </div>
+    </div>
+</template> -->
     <template if:true={val}>
-        <div class="modal-backdrop" onclick={closeModal}>
+        <div class="modal-backdrop">
             <div class="modal-content">
              <div class="box1" onclick={roomnumber1}>
-                <h1 class="heading">Meeting Room1</h1>
+                <h1 class="heading">Reserve Room</h1>
              </div>
              <div class="box2" onclick={roomnumber2}>
-                <h1 class="heading">Meeting Room2</h1>
+                <h1 class="heading">Zoom Meeting</h1>
              </div>
               <!-- <button onclick={closeModal}>Close</button> -->
             </div>
-            <div><button  class="close" onclick={closeModal}>Close</button></div>
+            <div><button  class="close" onclick={closeModal}>+</button></div>
           </div>
     </template>
     <template if:true={room1}>
         <div class="modal-backdrop" >
             <div class="modal-content_1">
-               <h1 class="todayDate">Schedule Meeting on : {finaldateformodal}</h1>
+                <div class="bookRoom">
+                    <h1>Book Conference Room</h1>
+                </div>
+                <div>
+                <lightning-input label="Subject" placeholder="Subject" type="text" onchange={handlesubject}></lightning-input>
+                </div>
+               <h1 class="todayDate">Date : {finaldateformodal}</h1>
+               
                <div class="picklist_outer">
                <lightning-combobox
                class="startPicklist"
                label="Start Time"
                value={value}
-               placeholder="Select Start Time"
+               placeholder="Start Time"
                options={options}
-               onchange={handleChange} ></lightning-combobox>
+               onchange={handleChangestart} ></lightning-combobox>
+         
 
                <lightning-combobox
                class="startPicklist"
                label="End Time"
                value={value}
-               placeholder="Select End Time"
+               placeholder="End Time"
                options={endOptions}
-               onchange={handleChange} ></lightning-combobox>
+               onchange={handleChangeEnd} ></lightning-combobox>
             </div>
+
+           
+            <lightning-input label="Name" placeholder="Enter Name" type="text" onchange={handleName}></lightning-input>
+            <lightning-input label="Email" placeholder="Email" type="email" onchange={handleEmail}></lightning-input>
+
+          
+
+        <div class="descDiv">
+            <lightning-textarea name="input2" label="Description" onchange={handledescription}></lightning-textarea>
+        </div>
+        <button class="slds-button slds-button_brand" onclick={handlesubmit}>Submit</button>
+            </div>
+            <div><button  class="close_1" onclick={closeModalnext}>+</button></div>
+        </div>
+        
+    </template>
+    <template if:true={room2} >
+        <div class="modal-backdrop" onclick={closeModalnextagain}>
+            <div class="modal-content_2">
+                <div class="bookRoom">
+                    <h1>Zoom Meeting</h1>
+                </div>
+                <div>
+                <lightning-input label="Subject" placeholder="Subject" type="text" onchange={handlesubject}></lightning-input>
+                </div>
+               <h1 class="todayDate">Date : {finaldateformodal}</h1>
+               
+               <div class="picklist_outer">
+               <lightning-combobox
+               class="startPicklist"
+               label="Start Time"
+               value={value}
+               placeholder="Start Time"
+               options={options}
+               onchange={handleChangestart} ></lightning-combobox>
+         
+
+               <lightning-combobox
+               class="startPicklist"
+               label="End Time"
+               value={value}
+               placeholder="End Time"
+               options={endOptions}
+               onchange={handleChangeEnd} ></lightning-combobox>
+            </div>
+
             <div class="attendees_outer">
             <lightning-combobox
             class="attendees"
             label="Add Attendees"
             value={value}
             placeholder="Add Attendees"
-            options={Attendees}
-            onchange={handleChange} ></lightning-combobox>
-            <lightning-icon size="x-small" class="addIcon" icon-name="utility:add"></lightning-icon>
+            options={valuedata}
+            onchange={handleChangeattendees} ></lightning-combobox>
+            
+            <!-- <lightning-input label="Name" placeholder="Enter Name" type="text" onchange={handleName}></lightning-input>
+            <lightning-input label="Email" placeholder="Email" type="email" onchange={handleEmail}></lightning-input> -->
+            <!-- <div class="addIcon_outer">
+            <lightning-icon size="x-small" class="addIcon" icon-name="utility:add" onclick={handleAddAttendees}></lightning-icon>
+        </div> -->
+
         </div>
-            </div>
-            <div><button  class="close" onclick={closeModalnext}>Close</button></div>
+
+        <div class="descDiv">
+            <lightning-textarea name="input2" label="Description" onchange={handledescription}></lightning-textarea>
         </div>
-        
-    </template>
-    <template if:true={room2} >
-        <div class="modal-backdrop" onclick={closeModalnextagain}>
-            <div class="modal-content_1">
-                <h1>I am Room 2</h1>
+        <button class="slds-button slds-button_brand" onclick={handlesubmit}>Submit</button>
             </div>
             <div>
-                <button  class="close" onclick={closeModalnextagain}>Close</button>
+                <div><button  class="close_2" onclick={closeModalnext}>+</button></div>
+            </div>
+        </div> 
+    </template>
+    <template if:true={addAttendees}>
+        <div class="modal-backdrop" onclick={closeModaladdAttendees}>
+            <div class="modal-content_1">
+                <h1>Add Attendees Page</h1>
+            </div>
+            <div>
+                <button  class="close" onclick={closeModaladdAttendees}>+</button>
             </div>
         </div> 
     </template>

@@ -21,14 +21,16 @@
             <template for:each={dates} for:item="date">
                
                     <div key={date.day} class="date"  onclick={choosedate}>
-                        <div data-id={date.day} > {date.day}  </div>
+                        <div data-id={date.day} class="insideDate"> {date.day}  </div>
                         
                         <template if:true={eventCheck}>
                             <div class="outerSubjectDiv">
                         <template for:each={date.valuess}  for:item="subbb">
-                            <div data-status={subbb.recStatus} key ={subbb} class="sub">
-                           
-                            {subbb.recSubject}
+                            <div data-status={subbb.recStatus} key ={subbb} class="sub" data-id={subbb.recName} onclick={EventShowDetails}>
+                            {subbb.recName}   
+                        <!-- <template if:true={showFullEventDetails}>
+                            <div data-id={subbb.recId} class="fullEventDetails"> Hello there </div>
+                        </template> -->
                             
                         </div>
                         </template>

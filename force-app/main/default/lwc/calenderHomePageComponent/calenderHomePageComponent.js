@@ -29,11 +29,13 @@ export default class CalenderHomePageComponent extends LightningElement {
                 console.log('Result===>'+ this.tempRec);
                 this.tempRec.forEach(a=>{
                     this.dateset.push({
+                        'id':a.Id,
                         'date': a.Date__c,
                         'sub' :a.Subject__c,
                         'startTime' : a.Start_Time__c,
                         'endTime':a.End_Time__c,
                         'status':a.Status__c,
+                        'Name':a.Name__c,
                     })
                 })
                 
@@ -117,12 +119,17 @@ export default class CalenderHomePageComponent extends LightningElement {
                 let finaldate = this.dates[l].day+" "+ this.displayMonth+" "+this.displayYear;
                 var onlydate = this.dateset[k].date;                  
                 sss.push({
+                    'recId':this.dateset[k].id,
                     'recSubject':this.dateset[k].sub,
                     'recStatus':this.dateset[k].status,
+                    'recStartTime':this.dateset[k].startTime,
+                    'recEndTime':this.dateset[k].endTime,
+                    'recName':this.dateset[k].Name,
                     });
                 for(var i=0;i < sss.length;i++){
                     if(finaldate == onlydate){
                         this.dates[l].valuess.push(sss[i]);
+                        //console.log('Each Record==>',this.dates[l].values.sss[i]);
                     }
                 }
             }
@@ -308,18 +315,26 @@ closeModaladdAttendees(){
                 let time6 = Number(time2[0] + time2[1]);
                 let time7 = Number(time3[0] + time3[1]);
                 let time8 = Number(time4[0] + time4[1]);
+                let checkStatus = this.dateset[g].status;
 
-                if(time5 < time7 && time5 < time6 && time6 >= time7){
-                    checkSlot = false;
-                    
+                if(checkStatus == 'Reject'){
+                    checkSlot = true;
                 }
-                else if(time5 > time7 && time5 < time6 && time6 < time8){
-                    checkSlot = false;
-                }
-                else if(time5 > time7 && time5 < time8 && time5 <time6){
-                    checkSlot = false;
+                else{
+
+                    if(time5 < time7 && time5 < time6 && time6 >= time7){
+                        checkSlot = false;
+                        
+                    }
+                    else if(time5 > time7 && time5 < time6 && time6 < time8){
+                        checkSlot = false;
+                    }
+                    else if(time5 > time7 && time5 < time8 && time5 <time6){
+                        checkSlot = false;
+                    }
                 }
             }
+
         }
 
         if(checkSlot == true){
@@ -378,13 +393,25 @@ hideEvent(){
 
 @track eventCheck = false;
 
+
 showAllEvent(){
     this.generateCalendarDates();
     this.eventCheck = true;
+    console.log('EventCheck==>',this.eventCheck)
 }
 
 hideAllEvent(){
     this.eventCheck = false;
+    console.log('EventCheck==>',this.eventCheck)
+}
+
+
+@track showFullEventDetails = false;
+dataAgain;
+EventShowDetails(e){
+this.dataAgain = e.target.dataset.id;
+console.log('Data Again==>',this.dataAgain);
+//this.showFullEventDetails = true;
 }
 
 }

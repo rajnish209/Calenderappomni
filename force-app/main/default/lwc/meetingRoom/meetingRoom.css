@@ -64,18 +64,6 @@ background: #8d95c8;
     font-weight: 500;
 }
 
-.firstBox:hover {
-    background-color: #5cb85c;
-  }
-  
-  .firstBox:hover .white-icon{
-    background-color: #5cb85c;
-  }
-  
-  .firstBox:hover .text{
-    color: white;
-  }
-
 .zoom{
     width: 18%;
     margin-left: 43%;
@@ -88,6 +76,23 @@ background: #8d95c8;
     background-color: #9FD0EC;
 
 }
+.firstBox:hover .white-icon{
+    background-color: #5cb85c;
+    color:white
+}
+.firstBox:hover{
+    background-color: #5cb85c;
+    color:white
+}
+
+/* .lastBox:hover .zoom{
+    background-color: green;
+    color:white
+}
+.lastBox:hover {
+    background-color: green;
+    color:white
+} */
 
 @media (min-width: 1200px) {
     .lastBox{
@@ -106,7 +111,7 @@ background: #8d95c8;
     cursor: pointer;
 }
 .close_1{
-    margin-top: -265px;
+    margin-top: -305px;
     font-size: 39px;
     transform: rotate(45deg);
     background: rgba(0,0,0,-0.6);
@@ -142,7 +147,7 @@ background: #8d95c8;
         margin-left: 39.5%;
     }
     .close_1{
-        margin-top: -290px;
+        margin-top: -310px;
         font-size: 39px;
         transform: rotate(45deg);
         background: rgba(0,0,0,-0.6);

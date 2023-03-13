@@ -93,13 +93,15 @@ get options() {
          return arr;
     }
 
-@track subject;
+    @track subject;
 @track start;
 @track end;
 @track totalattend =[];
 @track attendees="";
 @track des;
 @track datess;
+@track Name;
+@track email;
     handlesubject(e){
     this.subject = e.target.value;
     //console.log('this.subject' +this.subject);
@@ -110,46 +112,60 @@ get options() {
     handleChangeEnd(e){
     this.end = e.target.value;
     }
-    handleChangeattendees(e){
-    console.log('this.attendees'+this.totalattend.length);  
-    this.attendees=  e.target.value;
-    if(this.totalattend.length > 0){
-        let c=0;
-    for(var j = 0;j < this.totalattend.length;j++){
+    // handleChangeattendees(e){
+    // console.log('this.attendees'+this.totalattend.length);  
+    // this.attendees=  e.target.value;
+    // if(this.totalattend.length > 0){
+    //     let c=0;
+    // for(var j = 0;j < this.totalattend.length;j++){
 
-        if(this.totalattend[j] == this.attendees){
-          c++;
-        }
-      }
-      if(c == 0){
-        this.totalattend.push(this.attendees); 
-      }
-    }else{
-        this.totalattend.push(this.attendees); 
-    }
-    // console.log(this.attendees);
-    }
+    //     if(this.totalattend[j] == this.attendees){
+    //       c++;
+    //     }
+    //   }
+    //   if(c == 0){
+    //     this.totalattend.push(this.attendees); 
+    //   }
+    // }else{
+    //     this.totalattend.push(this.attendees); 
+    // }
+    // // console.log(this.attendees);
+    // }
     handledescription(e){
         this.des = e.target.value;
     }
     handledate(e){
             this.datess = e.target.value;
     }
+    handleName(e){
+            this.Name = e.target.value;
+    }
+    handleEmail(e){
+        this.email = e.target.value;
+    }
     handlesubmit(){
         this.val = false;
         console.log('this.attendees'+this.totalattend);
        let att = this.totalattend.toString();
         console.log('array'+att);
+
+        var formateDate = new Date(this.datess).toLocaleString('en-GB',{
+           
+            day: 'numeric',
+            month: 'long',
+             year: 'numeric'   
+          });
     if(this.subject != null){
     
-    storeEventdata({
-        arg1: this.subject, 
-        arg2: this.start,
-        arg3: this.end,
-        arg4: this.des,
-        arg5: this.datess,
-        arg6: att
-    })
+        storeEventdata({
+            arg1: this.subject.trim(), 
+            arg2: this.start,
+            arg3: this.end,
+            arg4: this.des.trim(),
+            arg5: formateDate,
+            arg6: this.email.trim(),
+            arg7: this.Name.trim(),
+        })
     .then(result =>{
        console.log('Success');
        this.notifier = "Your request is submitted successfully!";
@@ -169,8 +185,7 @@ get options() {
    
  }
  handleredirectcalender(){
-    window.open("https://d2v000002fkjpeas--partial.sandbox.my.salesforce-sites.com/CalenderHomePage","_blank");
-    //window.location.assign("https://d2v000002fkjpeas--partial.sandbox.my.salesforce-sites.com/CalenderHomePage");
+    window.location.assign("https://d2v000002fkjpeas--partial.sandbox.my.salesforce-sites.com/CalenderHomePage");
    
  }
 

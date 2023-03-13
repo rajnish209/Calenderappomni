@@ -9,7 +9,46 @@
     <div class="outerButton">
     <button class="slds-button slds-button_success" onclick={handleApprove}>Approve</button>
     <button class="slds-button slds-button_destructive" onclick={handleReject}>Reject</button>
+    <button class="slds-button slds-button_brand recall" onclick={handlePending}>Recall</button>
     </div>
+    
+    <!-- Comment Pop Up Modal -->
+
+    <template if:true={popUpApprove}>
+        <div class="modal-backdrop">
+            <div class="modal-content">
+                <div class="descDiv">
+                    <lightning-textarea name="input2" label="Comments" onchange={handleComment}></lightning-textarea>
+                </div>
+                <button class="slds-button slds-button_brand" onclick={handleCommentApprove}>Submit</button>
+            </div>
+            <div><button  class="close" onclick={closeModal}>+</button></div>
+          </div>
+    </template>
+    <!-- Reject Pop Up Model -->
+    <template if:true={popUpReject}>
+        <div class="modal-backdrop">
+            <div class="modal-content">
+                <div class="descDiv">
+                    <lightning-textarea name="input2" label="Comments" onchange={handleComment}></lightning-textarea>
+                </div>
+                <button class="slds-button slds-button_brand" onclick={handleCommentReject}>Submit</button>
+            </div>
+            <div><button  class="close" onclick={closeModal}>+</button></div>
+          </div>
+    </template>
+    <!-- Recall Pop Up Model -->
+    <template if:true={popUpRecall}>
+        <div class="modal-backdrop">
+            <div class="modal-content">
+                <div class="descDiv">
+                    <lightning-textarea name="input2" label="Comments" onchange={handleComment}></lightning-textarea>
+                </div>
+                <button class="slds-button slds-button_brand" onclick={handleCommentRecall}>Submit</button>
+            </div>
+            <div><button  class="close" onclick={closeModal}>+</button></div>
+          </div>
+    </template>
     <div class="heading">List of Events Booked on {FinalDate}</div>
     <div class="outerDataTable header">
         <div class="innerDataTable">Subject</div>

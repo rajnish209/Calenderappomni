@@ -1,0 +1,32 @@
+<template>
+    <div class="OuterDate">
+    <h1 class="Date">Date: {FinalDate}</h1>
+    </div>
+    <div class="OuterTime">
+        <div class="innerTime">Start Time :  {StartTime}</div>
+        <div class="innerTime">End Time :  {EndTime}</div>
+    </div>
+    <div class="outerButton">
+    <button class="slds-button slds-button_destructive" onclick={handleReject}>Cancel</button>
+    </div>
+    
+  
+  
+    <div class="heading">Event Booked on {FinalDate}</div>
+    <div class="outerDataTable header">
+        <div class="innerDataTable">Subject</div>
+        <div class="innerDataTable">Date</div>
+        <div class="innerDataTable">Start Time</div>
+        <div class="innerDataTable">End Time</div>
+        <div class="innerDataTable">Status</div>
+    </div>
+    <template for:each={totaldata} for:item="rec">
+        <div key={rec.sub} class="outerDataTable inside">
+            <div class="innerDataTable">{rec.sub}</div>
+            <div class="innerDataTable">{rec.date}</div>
+            <div class="innerDataTable">{rec.starttime}</div>
+            <div class="innerDataTable">{rec.endTime}</div>
+            <div class="innerDataTable">{rec.status}</div>
+        </div>
+    </template>
+</template>

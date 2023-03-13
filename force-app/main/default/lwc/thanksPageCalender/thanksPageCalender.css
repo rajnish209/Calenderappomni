@@ -1,4 +1,4 @@
-.heading{
+/* .heading{
     color:brown;
     margin-left: 40%;
     font-size: 45px;
@@ -11,6 +11,36 @@
 .block{
     display: flex;
     margin-left: 300px;
+}
+.block1{
+    border:solid 1px black;
+    width:350px;
+    height: 300px;
+}
+.block2{
+    border:solid 1px white;
+    width: 350px;
+    height: 300px;
+    margin-left: 250px;
+}
+.image1{
+    width: 400px;
+    height: 400px;
+} */
+
+.heading{
+    color:brown;
+    margin-left: 30%;
+    font-size: 45px;
+}
+.score{
+    color:green;
+    margin-left: 35%;
+    font-size: 35px;
+}
+.block{
+    display: flex;
+    margin-left: 25%;
 }
 .block1{
     border:solid 1px black;

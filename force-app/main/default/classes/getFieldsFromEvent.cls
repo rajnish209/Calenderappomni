@@ -34,39 +34,39 @@ public  class getFieldsFromEvent {
     
     @AuraEnabled(cacheable=true)
     public static List<Conference_Room__c> getSubject(){
-        return [SELECT Id,Subject__c,Date__c,Start_Time__c,End_Time__c,Status__c FROM Conference_Room__c];
+        return [SELECT Id,Subject__c,Date__c,Start_Time__c,End_Time__c,Status__c,Name__c FROM Conference_Room__c ORDER BY  Start_Time__c  ASC ];
     }
     
+    
     @AuraEnabled
-    public static void updateRecord(String status ,Id idagain){
-        try {
-            Conference_Room__c Updated = new  Conference_Room__c(
-                Id = idagain,
-                Status__c = status
-            );
-            update Updated;
-        } 
-        catch (Exception e) {
-            throw new AuraHandledException(e.getMessage());
-        }
-    }
-
-    @AuraEnabled
-    public static void runMyFlow(List<Id> recordIds) {
+    public static void runMyFlow(List<Id> recordIds,String comment) {
         Map<String,Object> params = new Map<String,Object>();
             params.put('recordId',recordIds[0]);
+            params.put('comment',comment);    
             Flow.Interview.updateApprove fetchRec = new Flow.Interview.updateApprove(params);
 
             fetchRec.start();
     }
 
     @AuraEnabled
-    public static void rejectFlow(List<Id> recordIds) {
+    public static void rejectFlow(List<Id> recordIds,String comment) {
         Map<String,Object> params = new Map<String,Object>();
             params.put('recordId',recordIds[0]);
+            params.put('comment',comment); 
             Flow.Interview.updateReject RejectRec = new Flow.Interview.updateReject(params);
 
             RejectRec.start();
+    }
+
+    
+    @AuraEnabled
+    public static void pendingFlow(List<Id> recordIds,String comment) {
+        Map<String,Object> params = new Map<String,Object>();
+            params.put('recordId',recordIds[0]);
+            params.put('comment',comment); 
+            Flow.Interview.updatePending PendingRec = new Flow.Interview.updatePending(params);
+
+            PendingRec.start();
     }
 
 }

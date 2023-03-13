@@ -19,6 +19,7 @@
     /* background-color: #1798c1; */
     background-color: #9FD0EC;;
 }
+
 .date{
     width: 98%;
     height: 100px;
@@ -27,7 +28,7 @@
     font-size: large;
     font-weight: 500;
     text-align: center;
-    padding-top: 35px;
+    /* padding-top: 35px; */
     cursor: pointer;
     transition: background-color 0.5s ease-in-out;
 }
@@ -35,6 +36,10 @@
 .date:hover {
     /* background-color: #1798c1; */
     background-color: #9FD0EC;
+}
+.insideDate{
+  padding-top: 16%;
+  height: 100%;
 }
 .dateEmpty{
     background-color: whitesmoke;
@@ -342,7 +347,7 @@ color: whitesmoke;
       margin-left: 93%;
     }
   .close_1{
-    margin-top: -290px;
+    margin-top: -305px;
     font-size: 39px;
     transform: rotate(45deg);
     background: rgba(0,0,0,-0.6);
@@ -397,7 +402,7 @@ color: whitesmoke;
     }
    
     .close_1{
-      margin-top: -311px;
+      margin-top: -327px;
       font-size: 39px;
       transform: rotate(45deg);
       background: rgba(0,0,0,-0.6);
@@ -443,6 +448,7 @@ color: whitesmoke;
   
 }
 .sub[data-status="Reject"]{
+  display: none;
     background-color: red;
     color: whitesmoke;
     text-decoration: line-through;
@@ -510,3 +516,4 @@ color: whitesmoke;
     border-radius: 5px;
     background: white;
 }
+

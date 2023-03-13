@@ -1,5 +1,5 @@
 import { LightningElement } from 'lwc';
-import thankYouImage from '@salesforce/resourceUrl/thankYouImage';
+import thankYouImage from '@salesforce/resourceUrl/SalesforceThankuTeddy';
 
 export default class ThanksPage extends LightningElement {
     logo = thankYouImage;

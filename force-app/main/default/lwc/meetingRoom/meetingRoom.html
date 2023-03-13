@@ -10,12 +10,13 @@
             <div class="outerBox">
                 <div class="firstTwoBox">
                     <div class="firstBox" onclick={handleFirst}>
+                        <!-- <img class="zoom" src={ReserveEvent} alt="#"/> -->
                         <lightning-icon icon-name="standard:shift" class="white-icon" size="large"></lightning-icon>
                         <p class="text">Reserve Room</p>
                     </div>
                     <div class="firstBox" onclick={handleredirectcalender}>
                         <lightning-icon icon-name="standard:event" class="white-icon" size="large"></lightning-icon>
-                        <p class="text">Visit Calender</p>
+                        <p class="text" >Visit Calender</p>
                     </div>
                 </div>
                 <div class="lastBox" onclick={handleLast}>
@@ -29,14 +30,14 @@
         <div class="modal-backdrop" >
             <div class="modal-content_1">
                 <div class="bookRoom">
-                    <h1>Book Conference Room</h1>
+                    <h1>Book Kailasha</h1>
                 </div>
                 <div>
                 <lightning-input label="Subject" placeholder="Subject" type="text" onchange={handlesubject}></lightning-input>
                 </div>
                <!-- <h1 class="todayDate">Date : {finaldateformodal}</h1> -->
                <p class="meetingTime">Meeting Time</p>
-               <input  class="calender" type="date" name="date_picker" value="2023-02-22" onclick={handledate} required>
+               <input  class="calender" type="date" name="date_picker"  onchange={handledate} required>
                <div class="picklist_outer">
                <lightning-combobox
                class="startPicklist"
@@ -54,22 +55,26 @@
                placeholder="End Time"
                options={endOptions}
                onchange={handleChangeEnd} ></lightning-combobox>
+          
             </div>
-
-            <div class="attendees_outer">
-            <lightning-combobox
+            <!-- <div class="attendees_outer"> -->
+            <!-- <lightning-combobox
             class="attendees"
             label="Add Attendees"
             value={value}
             placeholder="Add Attendees"
             options={valuedata}
-            onchange={handleChangeattendees} ></lightning-combobox>
+            onchange={handleChangeattendees} ></lightning-combobox> --> 
 
+
+            <lightning-input label="Name" placeholder="Enter Name" type="text" onchange={handleName}></lightning-input>
+            <lightning-input label="Email" placeholder="Email" type="email" onchange={handleEmail}></lightning-input>
+       
             <!-- <div class="addIcon_outer">
             <lightning-icon size="x-small" class="addIcon" icon-name="utility:add" onclick={handleAddAttendees}></lightning-icon>
         </div> -->
 
-        </div>
+        <!-- </div> -->
 
         <div class="descDiv">
             <lightning-textarea name="input2" label="Description" onchange={handledescription}></lightning-textarea>

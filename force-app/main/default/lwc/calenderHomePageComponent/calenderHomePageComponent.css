@@ -308,7 +308,7 @@ color: whitesmoke;
   .outerSubjectDiv{
     /* border: 1px solid green; */
     width: 41%;
-    margin-top: -62px;
+    margin-top: -98px;
     height: 98px;
   }
 
@@ -434,6 +434,7 @@ color: whitesmoke;
   border-radius: 5px;
   background: lightsteelblue;
   cursor: pointer;
+  /* border: 1px solid black; */
 
 }
 .sub:hover{

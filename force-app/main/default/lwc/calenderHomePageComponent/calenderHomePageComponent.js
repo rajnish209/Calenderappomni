@@ -5,6 +5,8 @@ import getSubject from '@salesforce/apex/getFieldsFromEvent.getSubject';
 import FORM_FACTOR from '@salesforce/client/formFactor';
 
 
+
+
 export default class CalenderHomePageComponent extends LightningElement { 
     @track displayMonth;
     @track displayYear;
@@ -19,7 +21,8 @@ export default class CalenderHomePageComponent extends LightningElement {
 
     connectedCallback() {  
         this.displayCurrentMonth();
-        this.handleLoad();   
+        this.handleLoad();  
+        
     }
 
     handleLoad() {
@@ -385,6 +388,7 @@ closeModaladdAttendees(){
 
 showEvent(e){
     this.showHoverEvent = true;
+
 }
 
 hideEvent(){
@@ -398,6 +402,8 @@ showAllEvent(){
     this.generateCalendarDates();
     this.eventCheck = true;
     console.log('EventCheck==>',this.eventCheck)
+    this.handleMicroSoft();
+    
 }
 
 hideAllEvent(){
@@ -414,4 +420,39 @@ console.log('Data Again==>',this.dataAgain);
 //this.showFullEventDetails = true;
 }
 
+handleMicroSoft(){
+const script = document.createElement('script');
+script.src = 'https://statics.teams.cdn.office.net/sdk/v1.8.0/js/MicrosoftTeams.min.js';
+document.head.appendChild(script);
+
+script.onload = () => {
+    // Initialize the Microsoft Teams SDK
+    microsoftTeams.initialize();
+
+    // Authenticate the user and get an access token
+    microsoftTeams.authentication.authenticate({
+        url: window.location.origin + '/oauthcallback.html',
+        width: 600,
+        height: 535,
+        successCallback: (result) => {
+            const accessToken = result.accessToken;
+
+            // Show the Teams scheduling dialog to book a meeting slot
+            microsoftTeams.scheduling.showScheduleNewEventDialog({
+                token: accessToken,
+                successCallback: (result) => {
+                    console.log('Meeting slot booked successfully:', result);
+                },
+                errorCallback: (error) => {
+                    console.error('Error booking meeting slot:', error);
+                }
+            });
+        },
+        failureCallback: (error) => {
+            console.error('Error authenticating user:', error);
+        }
+    });
+};
+}
+   
 }

@@ -71,7 +71,7 @@ handleReject(){
   .then(result => {
       // Handle successful flow execution  
        console.log('Flow Rejected successfully');
-        alert('Event is Rejected');
+        alert('Event is Cancelled');
        location.reload();
       })
        .catch(error => {

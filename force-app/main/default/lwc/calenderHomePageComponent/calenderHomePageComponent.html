@@ -28,9 +28,9 @@
                         <template for:each={date.valuess}  for:item="subbb">
                             <div data-status={subbb.recStatus} key ={subbb} class="sub" data-id={subbb.recName} onclick={EventShowDetails}>
                             {subbb.recName}   
-                        <!-- <template if:true={showFullEventDetails}>
+                        <template if:true={showFullEventDetails}>
                             <div data-id={subbb.recId} class="fullEventDetails"> Hello there </div>
-                        </template> -->
+                        </template>
                             
                         </div>
                         </template>

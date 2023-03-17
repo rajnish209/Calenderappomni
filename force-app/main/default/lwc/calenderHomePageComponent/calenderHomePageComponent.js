@@ -16,6 +16,7 @@ export default class CalenderHomePageComponent extends LightningElement {
     @track dateset=[];
     @track variable = false;
     @track tempRec;
+    @track disableButton = true;
   
   
 
@@ -267,14 +268,23 @@ closeModaladdAttendees(){
     handlesubject(e){
     this.subject = e.target.value;
     //console.log('this.subject' +this.subject);
+     if(this.subject!= null && this.start != null && this.end != null && this.email != null && this.name != null){
+        this.disableButton = false;
+    }
     }
 
     handleChangestart(e){
     this.start = e.target.value;
+    if(this.subject!= null && this.start != null && this.end != null && this.email != null && this.name != null){
+        this.disableButton = false;
+    }
     }
 
     handleChangeEnd(e){
     this.end = e.target.value;
+    if(this.subject!= null && this.start != null && this.end != null && this.email != null && this.name != null){
+        this.disableButton = false;
+    }
     }
 
     handleChangeattendees(e){ 
@@ -300,10 +310,16 @@ closeModaladdAttendees(){
 
     handleName(e){
         this.name = e.target.value;
+        if(this.subject!= null && this.start != null && this.end != null && this.email != null && this.name != null){
+            this.disableButton = false;
+        }
     }
 
     handleEmail(e){
-        this.email = e.target.value
+        this.email = e.target.value;
+        if(this.subject!= null && this.start != null && this.end != null && this.email != null && this.name != null){
+            this.disableButton = false;
+        }
     }
 
     handlesubmit(){
@@ -402,7 +418,6 @@ showAllEvent(){
     this.generateCalendarDates();
     this.eventCheck = true;
     console.log('EventCheck==>',this.eventCheck)
-    this.handleMicroSoft();
     
 }
 
@@ -414,45 +429,104 @@ hideAllEvent(){
 
 @track showFullEventDetails = false;
 dataAgain;
+@track result = [];
+
 EventShowDetails(e){
-this.dataAgain = e.target.dataset.id;
-console.log('Data Again==>',this.dataAgain);
-//this.showFullEventDetails = true;
-}
+    this.dataAgain = e.target.dataset.id;
+    e.stopPropagation();        // event.stopPropagation will stop the triggering of parent div
+    this.showFullEventDetails = true;
+    console.log('record Id==>',this.dataAgain);
 
-handleMicroSoft(){
-const script = document.createElement('script');
-script.src = 'https://statics.teams.cdn.office.net/sdk/v1.8.0/js/MicrosoftTeams.min.js';
-document.head.appendChild(script);
+        for(let i = 0; i < this.dateset.length;i++){
+            if(this.dateset[i].id == this.dataAgain){
+                this.result.push({
+                    'showSubject':this.dateset[i].sub,
+                    'showStartTime':this.dateset[i].startTime,
+                    'showEndTime':this.dateset[i].endTime,
+                    'showName':this.dateset[i].Name,
 
-script.onload = () => {
-    // Initialize the Microsoft Teams SDK
-    microsoftTeams.initialize();
-
-    // Authenticate the user and get an access token
-    microsoftTeams.authentication.authenticate({
-        url: window.location.origin + '/oauthcallback.html',
-        width: 600,
-        height: 535,
-        successCallback: (result) => {
-            const accessToken = result.accessToken;
-
-            // Show the Teams scheduling dialog to book a meeting slot
-            microsoftTeams.scheduling.showScheduleNewEventDialog({
-                token: accessToken,
-                successCallback: (result) => {
-                    console.log('Meeting slot booked successfully:', result);
-                },
-                errorCallback: (error) => {
-                    console.error('Error booking meeting slot:', error);
-                }
-            });
-        },
-        failureCallback: (error) => {
-            console.error('Error authenticating user:', error);
+                })
+            }
+            console.log('Each Record==>',this.dateset[i].id);
         }
-    });
-};
+
+
 }
+closeModal_EventDetail(){
+    this.showFullEventDetails = false;
+    this.result = [];
+}
+
+ 
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// handleMicroSoft(){
+// const script = document.createElement('script');
+// script.src = 'https://statics.teams.cdn.office.net/sdk/v1.8.0/js/MicrosoftTeams.min.js';
+// document.head.appendChild(script);
+
+// script.onload = () => {
+//     // Initialize the Microsoft Teams SDK
+//     microsoftTeams.initialize();
+
+//     // Authenticate the user and get an access token
+//     microsoftTeams.authentication.authenticate({
+//         url: window.location.origin + '/oauthcallback.html',
+//         width: 600,
+//         height: 535,
+//         successCallback: (result) => {
+//             const accessToken = result.accessToken;
+
+//             // Show the Teams scheduling dialog to book a meeting slot
+//             microsoftTeams.scheduling.showScheduleNewEventDialog({
+//                 token: accessToken,
+//                 successCallback: (result) => {
+//                     console.log('Meeting slot booked successfully:', result);
+//                 },
+//                 errorCallback: (error) => {
+//                     console.error('Error booking meeting slot:', error);
+//                 }
+//             });
+//         },
+//         failureCallback: (error) => {
+//             console.error('Error authenticating user:', error);
+//         }
+//     });
+// };
+//}
    
-}
+

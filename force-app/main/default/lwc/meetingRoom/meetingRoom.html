@@ -12,7 +12,7 @@
                     <div class="firstBox" onclick={handleFirst}>
                         <!-- <img class="zoom" src={ReserveEvent} alt="#"/> -->
                         <lightning-icon icon-name="standard:shift" class="white-icon" size="large"></lightning-icon>
-                        <p class="text">Reserve Room</p>
+                        <p class="text">Reserve Kailasha</p>
                     </div>
                     <div class="firstBox" onclick={handleredirectcalender}>
                         <lightning-icon icon-name="standard:event" class="white-icon" size="large"></lightning-icon>
@@ -57,25 +57,12 @@
                onchange={handleChangeEnd} ></lightning-combobox>
           
             </div>
-            <!-- <div class="attendees_outer"> -->
-            <!-- <lightning-combobox
-            class="attendees"
-            label="Add Attendees"
-            value={value}
-            placeholder="Add Attendees"
-            options={valuedata}
-            onchange={handleChangeattendees} ></lightning-combobox> --> 
+       
 
 
             <lightning-input label="Name" placeholder="Enter Name" type="text" onchange={handleName}></lightning-input>
             <lightning-input label="Email" placeholder="Email" type="email" onchange={handleEmail}></lightning-input>
        
-            <!-- <div class="addIcon_outer">
-            <lightning-icon size="x-small" class="addIcon" icon-name="utility:add" onclick={handleAddAttendees}></lightning-icon>
-        </div> -->
-
-        <!-- </div> -->
-
         <div class="descDiv">
             <lightning-textarea name="input2" label="Description" onchange={handledescription}></lightning-textarea>
         </div>

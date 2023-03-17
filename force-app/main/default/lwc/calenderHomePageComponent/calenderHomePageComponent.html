@@ -18,33 +18,53 @@
                 </template>
             </div>
             <div class="dates">
-            <template for:each={dates} for:item="date">
-               
-                    <div key={date.day} class="date"  onclick={choosedate}>
-                        <div data-id={date.day} class="insideDate"> {date.day}  </div>
-                        
-                        <template if:true={eventCheck}>
-                            <div class="outerSubjectDiv">
-                        <template for:each={date.valuess}  for:item="subbb">
-                            <div data-status={subbb.recStatus} key ={subbb} class="sub" data-id={subbb.recName} onclick={EventShowDetails}>
-                            {subbb.recName}   
-                        <template if:true={showFullEventDetails}>
-                            <div data-id={subbb.recId} class="fullEventDetails"> Hello there </div>
-                        </template>
+                <template for:each={dates} for:item="date">
+                
+                        <div key={date.day} class="date"  onclick={choosedate}>
+                            <div data-id={date.day} class="insideDate"> {date.day}  </div>
                             
-                        </div>
-                        </template>
-                    </div>
-                    </template>
-                    
-                        
-                    </div>           
+                            <template if:true={eventCheck}>
+                                <div class="outerSubjectDiv">
+                                    <template for:each={date.valuess}  for:item="subbb">
+                                        <div data-status={subbb.recStatus} key ={subbb} class="sub" data-id={subbb.recId} onclick={EventShowDetails}>
+                                                {subbb.recName}                               
+                                        </div>
+                                            <!-- <div key={subbb} class={subbb.recName}> 
+                                                Hello there
+                                            </div> -->
+                                    </template>
+                                </div>
+                            </template>
+                        </div>           
 
-        </template>
-        
+                </template>
             </div>
         </div>
     </div>
+
+    <template if:true={showFullEventDetails} >
+        <div class="modal-backdrop" >
+            <div class="modal-content_1">
+                <div class="bookRoom">
+                    <h1>Event Details</h1>
+                </div>
+                <div>
+                        <template for:each={result}  for:item="subbb">
+                            <div key ={subbb} class="SubjectShow">
+                                <p> Agenda of the meeting : <b>{subbb.showSubject}</b>  </p>                             
+                            </div>
+                            <div key={subbb} class="meetingTime SubjectShow"> 
+                                FROM <b>{subbb.showStartTime}</b> TO ,<b>{subbb.showEndTime}</b>
+                            </div>
+                            <div key={subbb} class="SubjectShow">
+                                Meeting Booked By : <b>{subbb.showName}</b>
+                            </div>
+                        </template>
+                </div>         
+            </div>
+            <div><button  class="showClose" onclick={closeModal_EventDetail}>+</button></div>
+        </div>
+    </template>
   
     <template if:true={val}>
         <div class="modal-backdrop">
@@ -105,7 +125,7 @@
         <div class="descDiv">
             <lightning-textarea name="input2" label="Description" onchange={handledescription}></lightning-textarea>
         </div>
-        <button class="slds-button slds-button_brand" onclick={handlesubmit}>Submit</button>
+        <button class="slds-button slds-button_brand" onclick={handlesubmit} disabled={disableButton}>Submit</button>
             </div>
             <div><button  class="close_1" onclick={closeModalnext}>+</button></div>
         </div>

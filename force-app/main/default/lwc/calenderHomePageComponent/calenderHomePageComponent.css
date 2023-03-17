@@ -237,7 +237,7 @@ color: whitesmoke;
 
   .bookRoom{
     text-align: center;
-    font-size: large;
+    font-size: x-large;
     font-style: oblique;
   }
 
@@ -518,3 +518,17 @@ color: whitesmoke;
     background: white;
 }
 
+.SubjectShow{
+  text-align: center;
+  padding: 6px 0 4px 0px;
+  font-size: large;
+}
+
+.showClose{
+  margin-top: -150px;
+  font-size: 39px;
+  transform: rotate(45deg);
+  background: rgba(0,0,0,-0.6);
+  border: none;
+  color: whitesmoke;
+  }

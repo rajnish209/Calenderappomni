@@ -12,11 +12,13 @@ export default class MeetingRoom extends LightningElement {
     Zoom = ZoomIcon;
     Feedback = Feedback;
     ReserveEvent = ReserveEvent;
+   
 
     @track first = false;
     @track second = false;
     @track third = false;
     @track closeButton = true;
+    @track disableButton = true;
 
     handleFirst(){
         this.first = true;
@@ -104,14 +106,23 @@ get options() {
 @track email;
     handlesubject(e){
     this.subject = e.target.value;
-    //console.log('this.subject' +this.subject);
+    if(this.subject!= null && this.start != null && this.end != null && this.email != null && this.Name != null){
+        this.disableButton = false;
+    }
+
     }
     handleChangestart(e){
     this.start = e.target.value;
+    if(this.subject!= null && this.start != null && this.end != null && this.email != null && this.Name != null){
+        this.disableButton = false;
+    }
     }
     handleChangeEnd(e){
     this.end = e.target.value;
+    if(this.subject!= null && this.start != null && this.end != null && this.email != null && this.Name != null){
+        this.disableButton = false;
     }
+}
     // handleChangeattendees(e){
     // console.log('this.attendees'+this.totalattend.length);  
     // this.attendees=  e.target.value;
@@ -135,15 +146,23 @@ get options() {
         this.des = e.target.value;
     }
     handledate(e){
-            this.datess = e.target.value;
+        this.datess = e.target.value;
+        
     }
     handleName(e){
-            this.Name = e.target.value;
+        this.Name = e.target.value;
+        if(this.subject!= null && this.start != null && this.end != null && this.email != null && this.Name != null){
+            this.disableButton = false;
+        }
     }
     handleEmail(e){
         this.email = e.target.value;
+        if(this.subject!= null && this.start != null && this.end != null && this.email != null && this.Name != null){
+            this.disableButton = false;
+        }
     }
     handlesubmit(){
+        this.disableButton = true;
         this.val = false;
         console.log('this.attendees'+this.totalattend);
        let att = this.totalattend.toString();
@@ -181,7 +200,7 @@ get options() {
         location.reload();
     })
    }
-   //window.location.assign("https://d2v000002fkjpeas--partial.sandbox.my.salesforce-sites.com/thanks");
+   window.location.assign("https://d2v000002fkjpeas--partial.sandbox.my.salesforce-sites.com/thanks");
    
  }
  handleredirectcalender(){

@@ -60,13 +60,13 @@
        
 
 
-            <lightning-input label="Name" placeholder="Enter Name" type="text" onchange={handleName}></lightning-input>
-            <lightning-input label="Email" placeholder="Email" type="email" onchange={handleEmail}></lightning-input>
+            <lightning-input label="Name" placeholder="First Name" type="text" onchange={handleName} maxlength="10"></lightning-input>
+            <lightning-input label="Email" placeholder="Omnicloud Email" type="email" onchange={handleEmail}></lightning-input>
        
         <div class="descDiv">
             <lightning-textarea name="input2" label="Description" onchange={handledescription}></lightning-textarea>
         </div>
-        <button class="slds-button slds-button_brand" onclick={handlesubmit}>Submit</button>
+        <button class="slds-button slds-button_brand" onclick={handlesubmit} disabled={disableButton}>Submit</button>
             </div>
             <div><button  class="close_1" onclick={closeModalnext}>+</button></div>
         </div>

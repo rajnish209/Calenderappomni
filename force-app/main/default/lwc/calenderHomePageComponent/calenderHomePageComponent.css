@@ -1,6 +1,7 @@
 .weekdays,.dates{
     display: grid;
     grid-template-columns: repeat(7,1fr);
+  
     /* border: 1px solid grey; */
 }
 .weekday{
@@ -40,6 +41,7 @@
 .insideDate{
   padding-top: 16%;
   height: 100%;
+  overflow-y: auto;
 }
 .dateEmpty{
     background-color: whitesmoke;
@@ -310,7 +312,14 @@ color: whitesmoke;
     width: 41%;
     margin-top: -98px;
     height: 98px;
+    overflow-y: auto;
+    
   }
+
+  ::-webkit-scrollbar {
+    width: 0;  /* Remove scrollbar space */
+    background: transparent;  /* Optional: just make scrollbar invisible */
+}
 
   @media (min-width: 1200px) {
     .hide{
@@ -434,6 +443,10 @@ color: whitesmoke;
   border-radius: 5px;
   background: lightsteelblue;
   cursor: pointer;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+
   /* border: 1px solid black; */
 
 }

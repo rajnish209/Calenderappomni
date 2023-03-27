@@ -80,11 +80,13 @@ export default class CalenderHomePageComponent extends LightningElement {
         const today = new Date();
         this.displayMonth = today.toLocaleString('default', { month: 'long' });
         this.displayYear = today.getFullYear();
+        
         this.generateCalendarDates();
     }
 
     previousMonth() {
         const currentDate = new Date(`${this.displayMonth} 1, ${this.displayYear}`);
+        console.log('date',currentDate)
         currentDate.setMonth(currentDate.getMonth() - 1);
         this.displayMonth = currentDate.toLocaleString('default', { month: 'long' });
         this.displayYear = currentDate.getFullYear();
@@ -203,10 +205,29 @@ handleChange(event) {
 }
 
 choosedate(e){
+let today = new Date();
+let months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+
+let day = today.getDate();
+let month = today.getMonth() + 1;
+let year = today.getFullYear();
 this.data = e.target.dataset.id;
-if(this.data != undefined){
-this.val = true;
+
+if(this.data != undefined &&  this.displayYear >= year){
+    let selectedMonth;
+    for(let i = 0; i < months.length;i++){
+    if(months[i] == this.displayMonth){
+        selectedMonth = i + 1;
+        }
+     }
+     if(selectedMonth >= month){
+        if(this.data >= day){
+            this.val = true;
+        }
+     }
+    
 }
+
 
 this.choosedateagain(); 
 }
@@ -271,6 +292,7 @@ closeModaladdAttendees(){
      if(this.subject!= null && this.start != null && this.end != null && this.email != null && this.name != null){
         this.disableButton = false;
     }
+    //this.subject = '';
     }
 
     handleChangestart(e){
@@ -278,6 +300,7 @@ closeModaladdAttendees(){
     if(this.subject!= null && this.start != null && this.end != null && this.email != null && this.name != null){
         this.disableButton = false;
     }
+   // this.start = '';
     }
 
     handleChangeEnd(e){
@@ -285,6 +308,7 @@ closeModaladdAttendees(){
     if(this.subject!= null && this.start != null && this.end != null && this.email != null && this.name != null){
         this.disableButton = false;
     }
+    //this.end= '';
     }
 
     handleChangeattendees(e){ 
@@ -306,6 +330,7 @@ closeModaladdAttendees(){
 
     handledescription(e){
         this.des = e.target.value;
+      //  this.des = '';
     }
 
     handleName(e){
@@ -313,6 +338,7 @@ closeModaladdAttendees(){
         if(this.subject!= null && this.start != null && this.end != null && this.email != null && this.name != null){
             this.disableButton = false;
         }
+        
     }
 
     handleEmail(e){
@@ -320,9 +346,13 @@ closeModaladdAttendees(){
         if(this.subject!= null && this.start != null && this.end != null && this.email != null && this.name != null){
             this.disableButton = false;
         }
+        
     }
+    // this.email = '';
+    // this.name = '';
 
     handlesubmit(){
+        this.disableButton = true;
          let checkSlot = true;
         for(var g =0;g < this.dateset.length;g++){
             if(this.finaldateformodal == this.dateset[g].date){
@@ -373,6 +403,7 @@ closeModaladdAttendees(){
                 })
                 .then(result =>{
                     console.log('Success');
+                   
                     this.notifier = "Your request is submitted successfully!";
                     this.showForm = false;
                     this.showSuccess = true;

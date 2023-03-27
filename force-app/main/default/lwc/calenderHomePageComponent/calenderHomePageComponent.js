@@ -228,7 +228,6 @@ if(this.data != undefined &&  this.displayYear >= year){
     
 }
 
-
 this.choosedateagain(); 
 }
 

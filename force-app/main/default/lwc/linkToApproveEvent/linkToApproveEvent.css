@@ -111,3 +111,8 @@ font-size: medium;
 .descDiv{
     margin-bottom:3%;
 }
+.most_outer_box{
+    height: 25rem;
+    overflow-y: auto;
+    /* border: 1px solid black; */
+}

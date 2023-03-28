@@ -1,6 +1,7 @@
 import { LightningElement,track,wire } from 'lwc';
 import storeEventdata from '@salesforce/apex/getFieldsFromEvent.storeEventdata';
 import getAttendees from '@salesforce/apex/getFieldsFromEvent.getAttendees';
+import getSubject from '@salesforce/apex/getFieldsFromEvent.getSubject';
 import OmnicloudLogo2 from '@salesforce/resourceUrl/OmnicloudLogo2'
 import ZoomIcon from '@salesforce/resourceUrl/ZoomIcon'
 import ReserveEvent from '@salesforce/resourceUrl/ReserveEvent'
@@ -19,6 +20,27 @@ export default class MeetingRoom extends LightningElement {
     @track third = false;
     @track closeButton = true;
     @track disableButton = true;
+    @track dateset=[];
+
+    @wire(getSubject)
+    wiredSubject({error,data}){
+        if(data){
+            data.forEach(a=>{
+                this.dateset.push({
+                    'id':a.Id,
+                    'date': a.Date__c,
+                    'sub' :a.Subject__c,
+                    'startTime' : a.Start_Time__c,
+                    'endTime':a.End_Time__c,
+                    'status':a.Status__c,
+                    'Name':a.Name__c,
+                })
+            })
+        }
+        else{
+            console.error('Error Occured==>',error);
+        }
+    }
 
     handleFirst(){
         this.first = true;
@@ -36,6 +58,7 @@ export default class MeetingRoom extends LightningElement {
         this.second = false;
     }
 @track value=[];
+
     @wire(getAttendees)
     wiredContact({error,data}){
          if(data){
@@ -95,7 +118,7 @@ get options() {
          return arr;
     }
 
-    @track subject;
+@track subject;
 @track start;
 @track end;
 @track totalattend =[];
@@ -104,6 +127,8 @@ get options() {
 @track datess;
 @track Name;
 @track email;
+
+
     handlesubject(e){
     this.subject = e.target.value;
     if(this.subject!= null && this.start != null && this.end != null && this.email != null && this.Name != null){
@@ -123,25 +148,7 @@ get options() {
         this.disableButton = false;
     }
 }
-    // handleChangeattendees(e){
-    // console.log('this.attendees'+this.totalattend.length);  
-    // this.attendees=  e.target.value;
-    // if(this.totalattend.length > 0){
-    //     let c=0;
-    // for(var j = 0;j < this.totalattend.length;j++){
 
-    //     if(this.totalattend[j] == this.attendees){
-    //       c++;
-    //     }
-    //   }
-    //   if(c == 0){
-    //     this.totalattend.push(this.attendees); 
-    //   }
-    // }else{
-    //     this.totalattend.push(this.attendees); 
-    // }
-    // // console.log(this.attendees);
-    // }
     handledescription(e){
         this.des = e.target.value;
     }
@@ -161,50 +168,106 @@ get options() {
             this.disableButton = false;
         }
     }
-    handlesubmit(){
-        this.disableButton = true;
-        this.val = false;
-        console.log('this.attendees'+this.totalattend);
-       let att = this.totalattend.toString();
-        console.log('array'+att);
 
+
+    handlesubmit(){
         var formateDate = new Date(this.datess).toLocaleString('en-GB',{
            
             day: 'numeric',
             month: 'long',
              year: 'numeric'   
           });
-    if(this.subject != null){
-    
-        storeEventdata({
-            arg1: this.subject.trim(), 
-            arg2: this.start,
-            arg3: this.end,
-            arg4: this.des.trim(),
-            arg5: formateDate,
-            arg6: this.email.trim(),
-            arg7: this.Name.trim(),
-        })
-    .then(result =>{
-       console.log('Success');
-       this.notifier = "Your request is submitted successfully!";
-       this.showForm = false;
-       this.showSuccess = true;
-       alert('Booked Successfully');
-       location.reload();
-       this.room1 = false;
-    }).catch(error=>{
-        console.log(error.body.message);
-        this.errormsg = error.body.message;
-        alert(this.errormsg);
-        location.reload();
-    })
-   }
-   window.location.assign("https://d2v000002fkjpeas--partial.sandbox.my.salesforce-sites.com/thanks");
-   
- }
+
+        this.disableButton = true;
+
+        let checkSlot = true;
+        for(var g =0;g < this.dateset.length;g++){
+            if(formateDate == this.dateset[g].date){
+                let time1 = this.start.split(':');
+                let time2 = this.end.split(':');
+                let time3 = this.dateset[g].startTime.split(':');
+                let time4 = this.dateset[g].endTime.split(':');
+                let time5 = Number(time1[0] + time1[1]);
+                let time6 = Number(time2[0] + time2[1]);
+                let time7 = Number(time3[0] + time3[1]);
+                let time8 = Number(time4[0] + time4[1]);
+                let checkStatus = this.dateset[g].status;
+
+                if(checkStatus == 'Reject'){
+                    checkSlot = true;
+                }
+                else{
+
+                    if(time5 < time7 && time5 < time6 && time6 >= time7){
+                        checkSlot = false;
+                        
+                    }
+                    else if(time5 > time7 && time5 < time6 && time6 < time8){
+                        checkSlot = false;
+                    }
+                    else if(time5 > time7 && time5 < time8 && time5 <time6){
+                        checkSlot = false;
+                    }
+                    else if(time5 == time7 && time6 == time8){
+                        checkSlot = false;
+                    }
+                }
+            }
+
+        }
+        // Getting Email Domain
+        let emailDomainCheck = this.email.split('@');
+        let omniDomain = emailDomainCheck[1].split('.');
+        let actualOmniDomain = omniDomain[0];
+
+        // Email Domain Check
+        if(actualOmniDomain == 'omnicloudconsulting'){
+            if(checkSlot == true){
+                this.val = false;
+                //console.log('this.attendees'+this.totalattend);
+                let att = this.totalattend.toString();
+                //console.log('array'+att);
+
+                    if(this.subject != null){
+                        storeEventdata({
+                            arg1: this.subject.trim(), 
+                            arg2: this.start,
+                            arg3: this.end,
+                            arg4: this.des.trim(),
+                            arg5: formateDate,
+                            arg6: this.email.trim(),
+                            arg7: this.Name.trim(),
+                        })
+                            .then(result =>{
+                            console.log('Success');
+                            this.notifier = "Your request is submitted successfully!";
+                            this.showForm = false;
+                            this.showSuccess = true;
+                            alert('Booked Successfully');
+                            //location.reload();
+                            this.room1 = false;
+                            }).catch(error=>{
+                                console.log(error.body.message);
+                                this.errormsg = error.body.message;
+                                alert(this.errormsg);
+                                //location.reload();
+                            })
+                            window.location.assign("https://d2v000002fkjpeas--partial.sandbox.my.salesforce-sites.com/thanks");
+                    }
+            }
+            else{
+                alert('This time slot is already taken');
+            }
+        }
+        else{
+            alert('Please Enter a Valid Omnicloud Email');
+            }
+    }
+           
+        
+
  handleredirectcalender(){
-    window.location.assign("https://d2v000002fkjpeas--partial.sandbox.my.salesforce-sites.com/CalenderHomePage");
+    window.open("https://d2v000002fkjpeas--partial.sandbox.my.salesforce-sites.com/CalenderHomePage","_blank");
    
  }
 

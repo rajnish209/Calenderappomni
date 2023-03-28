@@ -92,41 +92,75 @@
                 <div class="bookRoom">
                     <h1>Book Kailasha</h1>
                 </div>
+
                 <div>
-                <lightning-input label="Subject" placeholder="Subject" type="text" onchange={handlesubject}></lightning-input>
+                        <!-- Subject -->
+                    <lightning-input label="Subject" placeholder="Subject" type="text" onchange={handlesubject}></lightning-input>
                 </div>
+
+                <!-- Show Selected Date -->
                <h1 class="todayDate">Date : {finaldateformodal}</h1>
                
+               <!-- Start Time -->
                <div class="picklist_outer">
-               <lightning-combobox
-               class="startPicklist"
-               label="Start Time"
-               value={value}
-               placeholder="Start Time"
-               options={options}
-               onchange={handleChangestart} ></lightning-combobox>
+                    <lightning-combobox
+                                        class="startPicklist"
+                                        label="Start Time"
+                                        value={value}
+                                        placeholder="Start Time"
+                                        options={options}
+                                        onchange={handleChangestart} 
+                                        >
+                    </lightning-combobox>
          
+                    <!-- End Time -->
+                    <lightning-combobox
+                                        class="startPicklist"
+                                        label="End Time"
+                                        value={value}
+                                        placeholder="End Time"
+                                        options={endOptions}
+                                        onchange={handleChangeEnd} 
+                                        >
+                    </lightning-combobox>
+                </div>
 
-               <lightning-combobox
-               class="startPicklist"
-               label="End Time"
-               value={value}
-               placeholder="End Time"
-               options={endOptions}
-               onchange={handleChangeEnd} ></lightning-combobox>
+                <!-- Name Field -->
+                    <lightning-input label="Name"
+                                    placeholder="First Name"
+                                    type="text"
+                                    onchange={handleName}
+                                    maxlength="10"
+                                    >
+                    </lightning-input>
+                    
+                    <!-- Email Field -->
+                    <lightning-input label="Email"
+                                    pattern="[A-Za-z0-9._-]+@[omnicloudconsulting]+\.[a-z]{2,}$"
+                                    message-when-pattern-mismatch="Provide a Valid Omnicloud Email"
+                                    placeholder="Omnicloud Email"
+                                    type="email"
+                                    onchange={handleEmail}
+                                    >
+                    </lightning-input>
+
+                    <!-- Description Field -->
+                    <div class="descDiv">
+                        <lightning-textarea name="input2"
+                                            label="Description"
+                                            onchange={handledescription}
+                                            >
+                        </lightning-textarea>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button class="slds-button slds-button_brand"
+                            onclick={handlesubmit}
+                            disabled={disableButton}
+                            >Submit
+                    </button>
             </div>
-
-           
-            <lightning-input label="Name" placeholder="First Name" type="text" onchange={handleName} maxlength="10"></lightning-input>
-            <lightning-input label="Email" placeholder="Omnicloud Email" type="email" onchange={handleEmail}></lightning-input>
-
-          
-
-        <div class="descDiv">
-            <lightning-textarea name="input2" label="Description" onchange={handledescription}></lightning-textarea>
-        </div>
-        <button class="slds-button slds-button_brand" onclick={handlesubmit} disabled={disableButton}>Submit</button>
-            </div>
+            <!-- Close button -->
             <div><button  class="close_1" onclick={closeModalnext}>+</button></div>
         </div>
         

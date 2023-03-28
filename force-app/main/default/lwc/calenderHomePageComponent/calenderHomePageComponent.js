@@ -342,6 +342,7 @@ closeModaladdAttendees(){
 
     handleEmail(e){
         this.email = e.target.value;
+        console.log('Email show',this.email)
         if(this.subject!= null && this.start != null && this.end != null && this.email != null && this.name != null){
             this.disableButton = false;
         }
@@ -380,47 +381,61 @@ closeModaladdAttendees(){
                     else if(time5 > time7 && time5 < time8 && time5 <time6){
                         checkSlot = false;
                     }
+                    else if(time5 == time7 && time6 == time8){
+                        checkSlot = false;
+                    }
                 }
             }
 
         }
+        // Getting Email Domain
+        let emailDomainCheck = this.email.split('@');
+        let omniDomain = emailDomainCheck[1].split('.');
+        let actualOmniDomain = omniDomain[0];
 
-        if(checkSlot == true){
-            this.val = false;
-            console.log('this.attendees'+this.totalattend);
-            let att = this.totalattend.toString();
-            console.log('array'+att);
-            if(this.subject != null){
-                storeEventdata({
-                    arg1: this.subject, 
-                    arg2: this.start,
-                    arg3: this.end,
-                    arg4: this.des,
-                    arg5: this.finaldateformodal,
-                    arg6: this.email,
-                    arg7: this.name
-                })
-                .then(result =>{
-                    console.log('Success');
-                   
-                    this.notifier = "Your request is submitted successfully!";
-                    this.showForm = false;
-                    this.showSuccess = true;
-                    alert('Booked Successfully');
-                    location.reload();
-                    this.room1 = false;
-                }).catch(error=>{
-                        console.log(error.body.message);
-                        this.errormsg = error.body.message;
-                        alert(this.errormsg);
-                        location.reload();
-                })
-                window.location.assign("https://d2v000002fkjpeas--partial.sandbox.my.salesforce-sites.com/thanks");
-            }   
+        // Email Domain Check
+        if(actualOmniDomain == 'omnicloudconsulting'){
+            if(checkSlot == true){
+                this.val = false;
+                console.log('this.attendees'+this.totalattend);
+                let att = this.totalattend.toString();
+                console.log('array'+att);
+    
+                    if(this.subject != null){
+                        storeEventdata({
+                            arg1: this.subject, 
+                            arg2: this.start,
+                            arg3: this.end,
+                            arg4: this.des,
+                            arg5: this.finaldateformodal,
+                            arg6: this.email,
+                            arg7: this.name
+                        })
+                        .then(result =>{
+                            console.log('Success');
+                        
+                            this.notifier = "Your request is submitted successfully!";
+                            this.showForm = false;
+                            this.showSuccess = true;
+                            alert('Booked Successfully');
+                            location.reload();
+                            this.room1 = false;
+                        }).catch(error=>{
+                                console.log(error.body.message);
+                                this.errormsg = error.body.message;
+                                alert(this.errormsg);
+                            location.reload();
+                        })
+                    window.location.assign("https://d2v000002fkjpeas--partial.sandbox.my.salesforce-sites.com/thanks");
+                    } 
+            }
+            else{
+                    alert('This time slot is already taken');
+                }
         }
         else{
-                alert('This time slot is already taken');
-            }
+                alert('Please Enter a Valid Omnicloud Email');
+            } 
     }
 
 @track showHoverEvent = false;

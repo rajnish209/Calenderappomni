@@ -2,10 +2,10 @@ import { LightningElement } from 'lwc';
 import thankYouImage from '@salesforce/resourceUrl/SalesforceThankuTeddy';
 
 export default class ThanksPage extends LightningElement {
-    logo = thankYouImage;
-    connectedCallback(){
+  logo = thankYouImage;
+  connectedCallback() {
     setTimeout(() => {
-        window.location.assign("https://d2v000002fkjpeas--partial.sandbox.my.salesforce-sites.com/CalenderHomePage");
-      }, "2000")
-    }
+      window.location.assign("https://d2v000002fkjpeas--partial.sandbox.my.salesforce-sites.com/CalenderHomePage");
+    }, "2000")
+  }
 }

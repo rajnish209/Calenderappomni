@@ -1,4 +1,4 @@
-import { LightningElement,track,wire ,api } from 'lwc';
+import { LightningElement, track, wire, api } from 'lwc';
 import storeEventdata from '@salesforce/apex/getFieldsFromEvent.storeEventdata';
 import getAttendees from '@salesforce/apex/getFieldsFromEvent.getAttendees';
 import getSubject from '@salesforce/apex/getFieldsFromEvent.getSubject';
@@ -7,72 +7,73 @@ import FORM_FACTOR from '@salesforce/client/formFactor';
 
 
 
-export default class CalenderHomePageComponent extends LightningElement { 
+export default class CalenderHomePageComponent extends LightningElement {
     @track displayMonth;
     @track displayYear;
     @track weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
     @track dates = [];
-    @track value =[];
-    @track dateset=[];
+    @track value = [];
+    @track dateset = [];
     @track variable = false;
     @track tempRec;
     @track disableButton = true;
-  
-  
+    
 
-    connectedCallback() {  
+
+
+    connectedCallback() {
         this.displayCurrentMonth();
-        this.handleLoad();  
-        
+        this.handleLoad();
+
     }
 
     handleLoad() {
         getSubject()
             .then(result => {
                 this.tempRec = result;
-                console.log('Result===>'+ this.tempRec);
-                this.tempRec.forEach(a=>{
+                console.log('Result===>' + this.tempRec);
+                this.tempRec.forEach(a => {
                     this.dateset.push({
-                        'id':a.Id,
+                        'id': a.Id,
                         'date': a.Date__c,
-                        'sub' :a.Subject__c,
-                        'startTime' : a.Start_Time__c,
-                        'endTime':a.End_Time__c,
-                        'status':a.Status__c,
-                        'Name':a.Name__c,
+                        'sub': a.Subject__c,
+                        'startTime': a.Start_Time__c,
+                        'endTime': a.End_Time__c,
+                        'status': a.Status__c,
+                        'Name': a.Name__c,
                     })
                 })
-                
-                console.log('DateSet==>'+this.dateset)
+
+                console.log('DateSet==>' + this.dateset)
             })
-            
+
             .catch(error => {
                 this.error = error;
             });
     }
-    
 
 
-   
-    
-    get valuedata(){
+
+
+
+    get valuedata() {
         return this.value;
     }
 
 
-    @wire(getAttendees,{formFactor: FORM_FACTOR})
-    wiredContact({error,data}){
-         if(data){
-            data.forEach(a=>{
-               // console.log(a.Email__c);
-                this.value.push({label:a.Name,value:a.Name});
+    @wire(getAttendees, { formFactor: FORM_FACTOR })
+    wiredContact({ error, data }) {
+        if (data) {
+            data.forEach(a => {
+                // console.log(a.Email__c);
+                this.value.push({ label: a.Name, value: a.Name });
             })
-         }else{
-            console.log('error'+error);
-         }
+        } else {
+            console.log('error' + error);
+        }
     }
 
-    get valuedata(){
+    get valuedata() {
         return this.value;
     }
 
@@ -80,18 +81,18 @@ export default class CalenderHomePageComponent extends LightningElement {
         const today = new Date();
         this.displayMonth = today.toLocaleString('default', { month: 'long' });
         this.displayYear = today.getFullYear();
-        
+
         this.generateCalendarDates();
     }
 
     previousMonth() {
         const currentDate = new Date(`${this.displayMonth} 1, ${this.displayYear}`);
-        console.log('date',currentDate)
+        console.log('date', currentDate)
         currentDate.setMonth(currentDate.getMonth() - 1);
         this.displayMonth = currentDate.toLocaleString('default', { month: 'long' });
         this.displayYear = currentDate.getFullYear();
         this.generateCalendarDates();
-       
+
     }
 
     nextMonth() {
@@ -100,7 +101,7 @@ export default class CalenderHomePageComponent extends LightningElement {
         this.displayMonth = currentDate.toLocaleString('default', { month: 'long' });
         this.displayYear = currentDate.getFullYear();
         this.generateCalendarDates();
-     
+
     }
 
     generateCalendarDates() {
@@ -111,29 +112,29 @@ export default class CalenderHomePageComponent extends LightningElement {
         console.log('firstday-->' + firstDayOfMonth);
 
         for (let i = 0; i < firstDayOfMonth; i++) {
-            this.dates.push({ day: '', className: 'empty',flag:false ,valuess:[]});
-            
+            this.dates.push({ day: '', className: 'empty', flag: false, valuess: [] });
+
         }
         for (let i = 1; i <= daysInMonth; i++) {
-            this.dates.push({ day: i, className: '' ,flag:true ,valuess:[]});
-            
+            this.dates.push({ day: i, className: '', flag: true, valuess: [] });
+
         }
-            
-        for(let l=0;l< this.dates.length;l++){
-            for(let k =0;k < this.dateset.length;k++){
-                let sss=[];
-                let finaldate = this.dates[l].day+" "+ this.displayMonth+" "+this.displayYear;
-                var onlydate = this.dateset[k].date;                  
+
+        for (let l = 0; l < this.dates.length; l++) {
+            for (let k = 0; k < this.dateset.length; k++) {
+                let sss = [];
+                let finaldate = this.dates[l].day + " " + this.displayMonth + " " + this.displayYear;
+                var onlydate = this.dateset[k].date;
                 sss.push({
-                    'recId':this.dateset[k].id,
-                    'recSubject':this.dateset[k].sub,
-                    'recStatus':this.dateset[k].status,
-                    'recStartTime':this.dateset[k].startTime,
-                    'recEndTime':this.dateset[k].endTime,
-                    'recName':this.dateset[k].Name,
-                    });
-                for(var i=0;i < sss.length;i++){
-                    if(finaldate == onlydate){
+                    'recId': this.dateset[k].id,
+                    'recSubject': this.dateset[k].sub,
+                    'recStatus': this.dateset[k].status,
+                    'recStartTime': this.dateset[k].startTime,
+                    'recEndTime': this.dateset[k].endTime,
+                    'recName': this.dateset[k].Name,
+                });
+                for (var i = 0; i < sss.length; i++) {
+                    if (finaldate == onlydate) {
                         this.dates[l].valuess.push(sss[i]);
                         //console.log('Each Record==>',this.dates[l].values.sss[i]);
                     }
@@ -141,221 +142,221 @@ export default class CalenderHomePageComponent extends LightningElement {
             }
         }
 
-        for(let j = 0; j < this.dates.length;j++){
-            if(this.dates[j].flag == false){
+        for (let j = 0; j < this.dates.length; j++) {
+            if (this.dates[j].flag == false) {
                 this.variable = false;
             }
-            else if(this.dates[j].flag == true){
+            else if (this.dates[j].flag == true) {
                 this.variable = true;
             }
         }
     }
 
-@track finaldateformodal;
-@track data ;
-@track val = false;
-@track monthss;
-@track yearss;
-@track room1= false;
-@track room2= false;
-@track arr=[];
+    @track finaldateformodal;
+    @track data;
+    @track val = false;
+    @track monthss;
+    @track yearss;
+    @track room1 = false;
+    @track room2 = false;
+    @track arr = [];
 
 
-get options() {
-     var arr = [
-                {label: '9:00', value:'9:00' },{label:'9:15 ',value :'9:15 '},{label:'9:30 ',value :'9:30 '},{label:'9:45 ',value :'9:45 '},
-                {label:'10:00',value :'10:00'},{label:'10:15 ',value :'10:15 '},{label:'10:30 ',value :'10:30 '},{label:'10:45 ',value :'10:45 '},
-                {label:'11:00', value:'11:00' },{label:'11:15 ',value :'11:15 '},{label:'11:30 ',value :'11:30 '},{label:'11:45 ',value :'11:45 '},
-                {label:'12:00',value :'12:00'},{label:'12:15 ',value :'12:15 '},{label:'12:30 ',value :'12:30 '},{label:'12:45 ',value :'12:45 '},
-                {label:'13:00', value:'13:00' },{label:'13:15 ',value :'13:15 '},{label:'13:30 ',value :'13:30 '},{label:'13:45 ',value :'13:45 '},
-                {label:'14:00',value :'14:00'},{label:'14:15 ',value :'14:15 '},{label:'14:30 ',value :'14:30 '},{label:'14:45 ',value :'14:45 '},
-                {label:'15:00', value:'15:00' },{label:'15:15 ',value :'15:15 '},{label:'15:30 ',value :'15:30 '},{label:'15:45 ',value :':45 '},
-                {label:'16:00',value :'16:00'},{label:'16:15 ',value :'16:15 '},{label:'16:30 ',value :'16:30 '},{label:'16:45 ',value :'16:45 '},
-                {label:'17:00', value:'17:00' },{label:'17:15 ',value :'17:15 '},{label:'17:30 ',value :'17:30 '},{label:'17:45 ',value :'17:45 '},
-                {label:'18:00',value :'18:00'},{label:'18:15 ',value :'18:15 '},{label:'18:30 ',value :'18:30 '},{label:'18:45 ',value :'18:45 '},
-                {label:'19:00',value :'19:00'},{label:'19:15 ',value :'19:15 '},{label:'19:30 ',value :'19:30 '},{label:'19:45 ',value :'19:45 '},
-    
-    ];
-   
-      return arr;
-}
+    get options() {
+        var arr = [
+            { label: '9:00', value: '9:00' }, { label: '9:15 ', value: '9:15 ' }, { label: '9:30 ', value: '9:30 ' }, { label: '9:45 ', value: '9:45 ' },
+            { label: '10:00', value: '10:00' }, { label: '10:15 ', value: '10:15 ' }, { label: '10:30 ', value: '10:30 ' }, { label: '10:45 ', value: '10:45 ' },
+            { label: '11:00', value: '11:00' }, { label: '11:15 ', value: '11:15 ' }, { label: '11:30 ', value: '11:30 ' }, { label: '11:45 ', value: '11:45 ' },
+            { label: '12:00', value: '12:00' }, { label: '12:15 ', value: '12:15 ' }, { label: '12:30 ', value: '12:30 ' }, { label: '12:45 ', value: '12:45 ' },
+            { label: '13:00', value: '13:00' }, { label: '13:15 ', value: '13:15 ' }, { label: '13:30 ', value: '13:30 ' }, { label: '13:45 ', value: '13:45 ' },
+            { label: '14:00', value: '14:00' }, { label: '14:15 ', value: '14:15 ' }, { label: '14:30 ', value: '14:30 ' }, { label: '14:45 ', value: '14:45 ' },
+            { label: '15:00', value: '15:00' }, { label: '15:15 ', value: '15:15 ' }, { label: '15:30 ', value: '15:30 ' }, { label: '15:45 ', value: ':45 ' },
+            { label: '16:00', value: '16:00' }, { label: '16:15 ', value: '16:15 ' }, { label: '16:30 ', value: '16:30 ' }, { label: '16:45 ', value: '16:45 ' },
+            { label: '17:00', value: '17:00' }, { label: '17:15 ', value: '17:15 ' }, { label: '17:30 ', value: '17:30 ' }, { label: '17:45 ', value: '17:45 ' },
+            { label: '18:00', value: '18:00' }, { label: '18:15 ', value: '18:15 ' }, { label: '18:30 ', value: '18:30 ' }, { label: '18:45 ', value: '18:45 ' },
+            { label: '19:00', value: '19:00' }, { label: '19:15 ', value: '19:15 ' }, { label: '19:30 ', value: '19:30 ' }, { label: '19:45 ', value: '19:45 ' },
 
-get endOptions() {
-    var arr = [
-               {label:'9:15 ',value :'9:15 '},{label:'9:30 ',value :'9:30 '},{label:'9:45 ',value :'9:45 '},
-               {label:'10:00',value :'10:00'},{label:'10:15 ',value :'10:15 '},{label:'10:30 ',value :'10:30 '},{label:'10:45 ',value :'10:45 '},
-               {label:'11:00', value:'11:00' },{label:'11:15 ',value :'11:15 '},{label:'11:30 ',value :'11:30 '},{label:'11:45 ',value :'11:45 '},
-               {label:'12:00',value :'12:00'},{label:'12:15 ',value :'12:15 '},{label:'12:30 ',value :'12:30 '},{label:'12:45 ',value :'12:45 '},
-               {label:'13:00', value:'13:00' },{label:'13:15 ',value :'13:15 '},{label:'13:30 ',value :'13:30 '},{label:'13:45 ',value :'13:45 '},
-               {label:'14:00',value :'14:00'},{label:'14:15 ',value :'14:15 '},{label:'14:30 ',value :'14:30 '},{label:'14:45 ',value :'14:45 '},
-               {label:'15:00', value:'15:00' },{label:'15:15 ',value :'15:15 '},{label:'15:30 ',value :'15:30 '},{label:'15:45 ',value :':45 '},
-               {label:'16:00',value :'16:00'},{label:'16:15 ',value :'16:15 '},{label:'16:30 ',value :'16:30 '},{label:'16:45 ',value :'16:45 '},
-               {label:'17:00', value:'17:00' },{label:'17:15 ',value :'17:15 '},{label:'17:30 ',value :'17:30 '},{label:'17:45 ',value :'17:45 '},
-               {label:'18:00',value :'18:00'},{label:'18:15 ',value :'18:15 '},{label:'18:30 ',value :'18:30 '},{label:'18:45 ',value :'18:45 '},
-               {label:'19:00',value :'19:00'},{label:'19:15 ',value :'19:15 '},{label:'19:30 ',value :'19:30 '},{label:'19:45 ',value :'19:45 '},
-               {label:'20:00',value :'20:00'},
-   
-   ];
-  
-    return arr;
-}
+        ];
 
-handleChange(event) {
-    this.value = event.detail.value;
-}
-
-choosedate(e){
-let today = new Date();
-let months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-
-let day = today.getDate();
-let month = today.getMonth() + 1;
-let year = today.getFullYear();
-this.data = e.target.dataset.id;
-
-if(this.data != undefined &&  this.displayYear >= year){
-    let selectedMonth;
-    for(let i = 0; i < months.length;i++){
-    if(months[i] == this.displayMonth){
-        selectedMonth = i + 1;
-        }
-     }
-     if(selectedMonth >= month){
-        if(this.data >= day){
-            this.val = true;
-        }
-     }
-    
-}
-
-this.choosedateagain(); 
-}
-
-closeModal(){
-    this.val = false;
-    this.template.querySelector('.modal-backdrop').style.display = 'none';
-    location.reload();
-  }
-  closeModalnext() {
-    this.room1 = false;
-    this.template.querySelector('.modal-backdrop').style.display = 'none';
-    location.reload();
-  }
-  closeModalnextagain() {
-    this.room2 = false;
-    this.template.querySelector('.modal-backdrop').style.display = 'none';
-    location.reload();
-  }
-choosedateagain(){
-   let div= this.template.querySelector('.month-year');
-   this.monthss = div.innerHTML;
-   let finaldate =  this.data+" "+this.monthss;
-   this.finaldateformodal = finaldate;
-    console.log('Month-->' + this.finaldateformodal);
-    //location.reload();
-}
-
-roomnumber1(){
-this.room1 = true;
-}
-
-roomnumber2(){
-    //this.room2 = true;
-    window.location.assign('https://d2v000002fkjpeas--partial.sandbox.my.salesforce-sites.com/meetingroom');
-}
-
-@track addAttendees = false;
-
-handleAddAttendees(){
-    this.addAttendees = true;
-    console.log('Yes I am called');
-}
-closeModaladdAttendees(){
-    this.addAttendees = false;
-    this.template.querySelector('.modal-backdrop').style.display = 'none';
-    location.reload();
-}
-
-@track subject;
-@track start;
-@track end;
-@track totalattend =[];
-@track attendees="";
-@track des;
-@track name;
-@track email;
-
-    handlesubject(e){
-    this.subject = e.target.value;
-    //console.log('this.subject' +this.subject);
-     if(this.subject!= null && this.start != null && this.end != null && this.email != null && this.name != null){
-        this.disableButton = false;
-    }
-    //this.subject = '';
+        return arr;
     }
 
-    handleChangestart(e){
-    this.start = e.target.value;
-    if(this.subject!= null && this.start != null && this.end != null && this.email != null && this.name != null){
-        this.disableButton = false;
-    }
-   // this.start = '';
+    get endOptions() {
+        var arr = [
+            { label: '9:15 ', value: '9:15 ' }, { label: '9:30 ', value: '9:30 ' }, { label: '9:45 ', value: '9:45 ' },
+            { label: '10:00', value: '10:00' }, { label: '10:15 ', value: '10:15 ' }, { label: '10:30 ', value: '10:30 ' }, { label: '10:45 ', value: '10:45 ' },
+            { label: '11:00', value: '11:00' }, { label: '11:15 ', value: '11:15 ' }, { label: '11:30 ', value: '11:30 ' }, { label: '11:45 ', value: '11:45 ' },
+            { label: '12:00', value: '12:00' }, { label: '12:15 ', value: '12:15 ' }, { label: '12:30 ', value: '12:30 ' }, { label: '12:45 ', value: '12:45 ' },
+            { label: '13:00', value: '13:00' }, { label: '13:15 ', value: '13:15 ' }, { label: '13:30 ', value: '13:30 ' }, { label: '13:45 ', value: '13:45 ' },
+            { label: '14:00', value: '14:00' }, { label: '14:15 ', value: '14:15 ' }, { label: '14:30 ', value: '14:30 ' }, { label: '14:45 ', value: '14:45 ' },
+            { label: '15:00', value: '15:00' }, { label: '15:15 ', value: '15:15 ' }, { label: '15:30 ', value: '15:30 ' }, { label: '15:45 ', value: ':45 ' },
+            { label: '16:00', value: '16:00' }, { label: '16:15 ', value: '16:15 ' }, { label: '16:30 ', value: '16:30 ' }, { label: '16:45 ', value: '16:45 ' },
+            { label: '17:00', value: '17:00' }, { label: '17:15 ', value: '17:15 ' }, { label: '17:30 ', value: '17:30 ' }, { label: '17:45 ', value: '17:45 ' },
+            { label: '18:00', value: '18:00' }, { label: '18:15 ', value: '18:15 ' }, { label: '18:30 ', value: '18:30 ' }, { label: '18:45 ', value: '18:45 ' },
+            { label: '19:00', value: '19:00' }, { label: '19:15 ', value: '19:15 ' }, { label: '19:30 ', value: '19:30 ' }, { label: '19:45 ', value: '19:45 ' },
+            { label: '20:00', value: '20:00' },
+
+        ];
+
+        return arr;
     }
 
-    handleChangeEnd(e){
-    this.end = e.target.value;
-    if(this.subject!= null && this.start != null && this.end != null && this.email != null && this.name != null){
-        this.disableButton = false;
-    }
-    //this.end= '';
+    handleChange(event) {
+        this.value = event.detail.value;
     }
 
-    handleChangeattendees(e){ 
-        this.attendees=  e.target.value;
-        if(this.totalattend.length > 0){
-            let c=0;
-        for(var j = 0;j < this.totalattend.length;j++){
-            if(this.totalattend[j] == this.attendees){
-              c++;
+    choosedate(e) {
+        let today = new Date();
+        let months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+        let day = today.getDate();
+        let month = today.getMonth() + 1;
+        let year = today.getFullYear();
+        this.data = e.target.dataset.id;
+
+        if (this.data != undefined && this.displayYear >= year) {
+            let selectedMonth;
+            for (let i = 0; i < months.length; i++) {
+                if (months[i] == this.displayMonth) {
+                    selectedMonth = i + 1;
+                }
             }
+            if (selectedMonth >= month) {
+                if (this.data >= day) {
+                    this.val = true;
+                }
+            }
+
         }
-        if(c == 0){
-            this.totalattend.push(this.attendees); 
+
+        this.choosedateagain();
+    }
+
+    closeModal() {
+        this.val = false;
+        this.template.querySelector('.modal-backdrop').style.display = 'none';
+        location.reload();
+    }
+    closeModalnext() {
+        this.room1 = false;
+        this.template.querySelector('.modal-backdrop').style.display = 'none';
+        location.reload();
+    }
+    closeModalnextagain() {
+        this.room2 = false;
+        this.template.querySelector('.modal-backdrop').style.display = 'none';
+        location.reload();
+    }
+    choosedateagain() {
+        let div = this.template.querySelector('.month-year');
+        this.monthss = div.innerHTML;
+        let finaldate = this.data + " " + this.monthss;
+        this.finaldateformodal = finaldate;
+        console.log('Month-->' + this.finaldateformodal);
+        //location.reload();
+    }
+
+    roomnumber1() {
+        this.room1 = true;
+    }
+
+    roomnumber2() {
+        //this.room2 = true;
+        window.location.assign('https://d2v000002fkjpeas--partial.sandbox.my.salesforce-sites.com/meetingroom');
+    }
+
+    @track addAttendees = false;
+
+    handleAddAttendees() {
+        this.addAttendees = true;
+        console.log('Yes I am called');
+    }
+    closeModaladdAttendees() {
+        this.addAttendees = false;
+        this.template.querySelector('.modal-backdrop').style.display = 'none';
+        location.reload();
+    }
+
+    @track subject;
+    @track start;
+    @track end;
+    @track totalattend = [];
+    @track attendees = "";
+    @track des;
+    @track name;
+    @track email;
+
+    handlesubject(e) {
+        this.subject = e.target.value;
+        //console.log('this.subject' +this.subject);
+        if (this.subject != null && this.start != null && this.end != null && this.email != null && this.name != null) {
+            this.disableButton = false;
         }
-        }else{
-            this.totalattend.push(this.attendees); 
+        //this.subject = '';
+    }
+
+    handleChangestart(e) {
+        this.start = e.target.value;
+        if (this.subject != null && this.start != null && this.end != null && this.email != null && this.name != null) {
+            this.disableButton = false;
+        }
+        // this.start = '';
+    }
+
+    handleChangeEnd(e) {
+        this.end = e.target.value;
+        if (this.subject != null && this.start != null && this.end != null && this.email != null && this.name != null) {
+            this.disableButton = false;
+        }
+        //this.end= '';
+    }
+
+    handleChangeattendees(e) {
+        this.attendees = e.target.value;
+        if (this.totalattend.length > 0) {
+            let c = 0;
+            for (var j = 0; j < this.totalattend.length; j++) {
+                if (this.totalattend[j] == this.attendees) {
+                    c++;
+                }
+            }
+            if (c == 0) {
+                this.totalattend.push(this.attendees);
+            }
+        } else {
+            this.totalattend.push(this.attendees);
         }
     }
 
-    handledescription(e){
+    handledescription(e) {
         this.des = e.target.value;
-      //  this.des = '';
+        //  this.des = '';
     }
 
-    handleName(e){
+    handleName(e) {
         this.name = e.target.value;
-        if(this.subject!= null && this.start != null && this.end != null && this.email != null && this.name != null){
+        if (this.subject != null && this.start != null && this.end != null && this.email != null && this.name != null) {
             this.disableButton = false;
         }
-        
+
     }
 
-    handleEmail(e){
+    handleEmail(e) {
         this.email = e.target.value;
-        console.log('Email show',this.email)
-        if(this.subject!= null && this.start != null && this.end != null && this.email != null && this.name != null){
+        console.log('Email show', this.email)
+        if (this.subject != null && this.start != null && this.end != null && this.email != null && this.name != null) {
             this.disableButton = false;
         }
-        
+
     }
     // this.email = '';
     // this.name = '';
 
-    handlesubmit(){
+    handlesubmit() {
         this.disableButton = true;
-         let checkSlot = true;
-        for(var g =0;g < this.dateset.length;g++){
-            if(this.finaldateformodal == this.dateset[g].date){
+        let checkSlot = true;
+        for (var g = 0; g < this.dateset.length; g++) {
+            if (this.finaldateformodal == this.dateset[g].date) {
                 let time1 = this.start.split(':');
                 let time2 = this.end.split(':');
                 let time3 = this.dateset[g].startTime.split(':');
@@ -366,22 +367,22 @@ closeModaladdAttendees(){
                 let time8 = Number(time4[0] + time4[1]);
                 let checkStatus = this.dateset[g].status;
 
-                if(checkStatus == 'Reject'){
+                if (checkStatus == 'Reject') {
                     checkSlot = true;
                 }
-                else{
+                else {
 
-                    if(time5 < time7 && time5 < time6 && time6 >= time7){
+                    if (time5 < time7 && time5 < time6 && time6 >= time7) {
                         checkSlot = false;
-                        
+
                     }
-                    else if(time5 > time7 && time5 < time6 && time6 < time8){
-                        checkSlot = false;
-                    }
-                    else if(time5 > time7 && time5 < time8 && time5 <time6){
+                    else if (time5 > time7 && time5 < time6 && time6 < time8) {
                         checkSlot = false;
                     }
-                    else if(time5 == time7 && time6 == time8){
+                    else if (time5 > time7 && time5 < time8 && time5 < time6) {
+                        checkSlot = false;
+                    }
+                    else if (time5 == time7 && time6 == time8) {
                         checkSlot = false;
                     }
                 }
@@ -394,115 +395,115 @@ closeModaladdAttendees(){
         let actualOmniDomain = omniDomain[0];
 
         // Email Domain Check
-        if(actualOmniDomain == 'omnicloudconsulting'){
-            if(checkSlot == true){
+        if (actualOmniDomain == 'omnicloudconsulting') {
+            if (checkSlot == true) {
                 this.val = false;
-                console.log('this.attendees'+this.totalattend);
+                console.log('this.attendees' + this.totalattend);
                 let att = this.totalattend.toString();
-                console.log('array'+att);
-    
-                    if(this.subject != null){
-                        storeEventdata({
-                            arg1: this.subject, 
-                            arg2: this.start,
-                            arg3: this.end,
-                            arg4: this.des,
-                            arg5: this.finaldateformodal,
-                            arg6: this.email,
-                            arg7: this.name
-                        })
-                        .then(result =>{
+                console.log('array' + att);
+
+                if (this.subject != null) {
+                    storeEventdata({
+                        arg1: this.subject,
+                        arg2: this.start,
+                        arg3: this.end,
+                        arg4: this.des,
+                        arg5: this.finaldateformodal,
+                        arg6: this.email,
+                        arg7: this.name
+                    })
+                        .then(result => {
                             console.log('Success');
-                        
+
                             this.notifier = "Your request is submitted successfully!";
                             this.showForm = false;
                             this.showSuccess = true;
                             alert('Booked Successfully');
                             location.reload();
                             this.room1 = false;
-                        }).catch(error=>{
-                                console.log(error.body.message);
-                                this.errormsg = error.body.message;
-                                alert(this.errormsg);
+                        }).catch(error => {
+                            console.log(error.body.message);
+                            this.errormsg = error.body.message;
+                            alert(this.errormsg);
                             location.reload();
                         })
                     window.location.assign("https://d2v000002fkjpeas--partial.sandbox.my.salesforce-sites.com/thanks");
-                    } 
-            }
-            else{
-                    alert('This time slot is already taken');
                 }
+            }
+            else {
+                alert('This time slot is already taken');
+            }
         }
-        else{
-                alert('Please Enter a Valid Omnicloud Email');
-            } 
+        else {
+            alert('Please Enter a Valid Omnicloud Email');
+        }
     }
 
-@track showHoverEvent = false;
- @track subjec=[];
- @track finalval =[];
- @track finalTime;
- @track dataval;
+    @track showHoverEvent = false;
+    @track subjec = [];
+    @track finalval = [];
+    @track finalTime;
+    @track dataval;
 
-/* Showing Event for particular Date */
-
-
-showEvent(e){
-    this.showHoverEvent = true;
-
-}
-
-hideEvent(){
-    this.showHoverEvent = false;
-}
-
-@track eventCheck = false;
+    /* Showing Event for particular Date */
 
 
-showAllEvent(){
-    this.generateCalendarDates();
-    this.eventCheck = true;
-    console.log('EventCheck==>',this.eventCheck)
-    
-}
+    showEvent(e) {
+        this.showHoverEvent = true;
 
-hideAllEvent(){
-    this.eventCheck = false;
-    console.log('EventCheck==>',this.eventCheck)
-}
+    }
+
+    hideEvent() {
+        this.showHoverEvent = false;
+    }
+
+    @track eventCheck = false;
 
 
-@track showFullEventDetails = false;
-dataAgain;
-@track result = [];
+    showAllEvent() {
+        this.generateCalendarDates();
+        this.eventCheck = true;
+        console.log('EventCheck==>', this.eventCheck)
 
-EventShowDetails(e){
-    this.dataAgain = e.target.dataset.id;
-    e.stopPropagation();        // event.stopPropagation will stop the triggering of parent div
-    this.showFullEventDetails = true;
-    console.log('record Id==>',this.dataAgain);
+    }
 
-        for(let i = 0; i < this.dateset.length;i++){
-            if(this.dateset[i].id == this.dataAgain){
+    hideAllEvent() {
+        this.eventCheck = false;
+        console.log('EventCheck==>', this.eventCheck)
+    }
+
+
+    @track showFullEventDetails = false;
+    dataAgain;
+    @track result = [];
+
+    EventShowDetails(e) {
+        this.dataAgain = e.target.dataset.id;
+        e.stopPropagation();        // event.stopPropagation will stop the triggering of parent div
+        this.showFullEventDetails = true;
+        console.log('record Id==>', this.dataAgain);
+
+        for (let i = 0; i < this.dateset.length; i++) {
+            if (this.dateset[i].id == this.dataAgain) {
                 this.result.push({
-                    'showSubject':this.dateset[i].sub,
-                    'showStartTime':this.dateset[i].startTime,
-                    'showEndTime':this.dateset[i].endTime,
-                    'showName':this.dateset[i].Name,
+                    'showSubject': this.dateset[i].sub,
+                    'showStartTime': this.dateset[i].startTime,
+                    'showEndTime': this.dateset[i].endTime,
+                    'showName': this.dateset[i].Name,
 
                 })
             }
-            console.log('Each Record==>',this.dateset[i].id);
+            console.log('Each Record==>', this.dateset[i].id);
         }
 
 
-}
-closeModal_EventDetail(){
-    this.showFullEventDetails = false;
-    this.result = [];
-}
+    }
+    closeModal_EventDetail() {
+        this.showFullEventDetails = false;
+        this.result = [];
+    }
 
- 
+
 }
 
 
@@ -573,5 +574,5 @@ closeModal_EventDetail(){
 //     });
 // };
 //}
-   
+
 

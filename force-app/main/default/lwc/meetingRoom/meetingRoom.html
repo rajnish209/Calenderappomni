@@ -1,80 +1,77 @@
 <template>
-  
-        <div class="outerCard">
-            <div class="logo">
-                <img class="logoImg" src={logo} alt="#"/>
-                <h1 class="heading">OmniCloud Meeting Room</h1>
-                <p class="subHeading">OmniCloud - For internal use only.</p>
-            </div>
+    <div class="outerCard">
+        <div class="logo">
+            <img class="logoImg" src={logo} alt="#" />
+            <h1 class="heading">OmniCloud Meeting Room</h1>
+            <p class="subHeading">OmniCloud - For internal use only.</p>
+        </div>
 
-            <div class="outerBox">
-                <div class="firstTwoBox">
-                    <div class="firstBox" onclick={handleFirst}>
-                        <!-- <img class="zoom" src={ReserveEvent} alt="#"/> -->
-                        <lightning-icon icon-name="standard:shift" class="white-icon" size="large"></lightning-icon>
-                        <p class="text">Reserve Kailasha</p>
-                    </div>
-                    <div class="firstBox" onclick={handleredirectcalender}>
-                        <lightning-icon icon-name="standard:event" class="white-icon" size="large"></lightning-icon>
-                        <p class="text" >Visit Calender</p>
-                    </div>
+        <div class="outerBox">
+            <div class="firstTwoBox">
+                <div class="firstBox" onclick={handleFirst}>
+                    <!-- <img class="zoom" src={ReserveEvent} alt="#"/> -->
+                    <lightning-icon icon-name="standard:shift" class="white-icon" size="large"></lightning-icon>
+                    <p class="text">Reserve Kailasha</p>
                 </div>
-                <div class="lastBox" onclick={handleLast}>
-                    <img class="zoom" src={Feedback} alt="#"/>
-                    <p class="text">Give Feedback</p>
+                <div class="firstBox" onclick={handleredirectcalender}>
+                    <lightning-icon icon-name="standard:event" class="white-icon" size="large"></lightning-icon>
+                    <p class="text">Visit Calender</p>
                 </div>
+            </div>
+            <div class="lastBox" onclick={handleLast}>
+                <img class="zoom" src={Feedback} alt="#" />
+                <p class="text">Give Feedback</p>
             </div>
         </div>
-  
-    <template if:true={first} >
-        <div class="modal-backdrop" >
+    </div>
+
+    <template if:true={first}>
+        <div class="modal-backdrop">
             <div class="modal-content_1">
                 <div class="bookRoom">
                     <h1>Book Kailasha</h1>
                 </div>
                 <div>
-                <lightning-input label="Subject" placeholder="Subject" type="text" onchange={handlesubject}></lightning-input>
+                    <lightning-input label="Subject" placeholder="Subject" type="text"
+                        onchange={handlesubject}></lightning-input>
                 </div>
-               <!-- <h1 class="todayDate">Date : {finaldateformodal}</h1> -->
-               <p class="meetingTime">Meeting Time</p>
-               <input  class="calender" type="date" name="date_picker"  onchange={handledate} required>
-               <div class="picklist_outer">
-               <lightning-combobox
-               class="startPicklist"
-               label="Start Time"
-               value={value}
-               placeholder="Start Time"
-               options={options}
-               onchange={handleChangestart} ></lightning-combobox>
-         
+                <!-- <h1 class="todayDate">Date : {finaldateformodal}</h1> -->
+                <p class="meetingTime">Meeting Time</p>
+                <input class="calender" id="my-date-input" type="date" name="date_picker" onchange={handledate} min={TODAY} required>
 
-               <lightning-combobox
-               class="startPicklist"
-               label="End Time"
-               value={value}
-               placeholder="End Time"
-               options={endOptions}
-               onchange={handleChangeEnd} ></lightning-combobox>
-          
+
+
+                <div class="picklist_outer">
+                    <!-- Start Time -->
+                    <lightning-combobox class="startPicklist" label="Start Time" value={value} placeholder="Start Time"
+                        options={options} onchange={handleChangestart}>
+                    </lightning-combobox>
+
+                    <!-- End Time -->
+                    <lightning-combobox class="startPicklist" label="End Time" value={value} placeholder="End Time"
+                        options={endOptions} onchange={handleChangeEnd}>
+                    </lightning-combobox>
+                </div>
+
+
+                <!-- Name Field -->
+                <lightning-input label="Name" placeholder="First Name" type="text" onchange={handleName} maxlength="10">
+                </lightning-input>
+
+                <!-- Email Field -->
+                <lightning-input label="Email" placeholder="Omnicloud Email" type="email" onchange={handleEmail}
+                    pattern="[A-Za-z0-9._-]+@[omnicloudconsulting]+\.[a-z]{2,}$"
+                    message-when-pattern-mismatch="Provide a Valid Omnicloud Email">
+                </lightning-input>
+
+                <div class="descDiv">
+                    <lightning-textarea name="input2" label="Description"
+                        onchange={handledescription}></lightning-textarea>
+                </div>
+                <button class="slds-button slds-button_brand" onclick={handlesubmit}
+                    disabled={disableButton}>Submit</button>
             </div>
-       
-
-
-            <lightning-input label="Name" placeholder="First Name" type="text" onchange={handleName} maxlength="10"></lightning-input>
-            <lightning-input label="Email" placeholder="Omnicloud Email" type="email" onchange={handleEmail}
-                             pattern="[A-Za-z0-9._-]+@[omnicloudconsulting]+\.[a-z]{2,}$"
-                             message-when-pattern-mismatch="Provide a Valid Omnicloud Email"
-                             >
-            </lightning-input>
-       
-        <div class="descDiv">
-            <lightning-textarea name="input2" label="Description" onchange={handledescription}></lightning-textarea>
-        </div>
-        <button class="slds-button slds-button_brand" onclick={handlesubmit} disabled={disableButton}>Submit</button>
-            </div>
-            <div><button  class="close_1" onclick={closeModalnext}>+</button></div>
+            <div><button class="close_1" onclick={closeModalnext}>+</button></div>
         </div>
     </template>
-                <!-- Second box -->
-   
 </template>

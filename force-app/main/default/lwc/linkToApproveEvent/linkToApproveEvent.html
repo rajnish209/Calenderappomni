@@ -1,17 +1,17 @@
 <template>
     <div class="OuterDate">
-    <h1 class="Date">Date: {FinalDate}</h1>
+        <h1 class="Date">Date: {FinalDate}</h1>
     </div>
     <div class="OuterTime">
-        <div class="innerTime">Start Time :  {StartTime}</div>
-        <div class="innerTime">End Time :  {EndTime}</div>
+        <div class="innerTime">Start Time : {StartTime}</div>
+        <div class="innerTime">End Time : {EndTime}</div>
     </div>
     <div class="outerButton">
-    <button class="slds-button slds-button_success" onclick={handleApprove}>Approve</button>
-    <button class="slds-button slds-button_destructive" onclick={handleReject}>Reject</button>
-    <button class="slds-button slds-button_brand recall" onclick={handlePending}>Recall</button>
+        <button class="slds-button slds-button_success" onclick={handleApprove}>Approve</button>
+        <button class="slds-button slds-button_destructive" onclick={handleReject}>Reject</button>
+        <button class="slds-button slds-button_brand recall" onclick={handlePending}>Recall</button>
     </div>
-    
+
     <!-- Comment Pop Up Modal -->
 
     <template if:true={popUpApprove}>
@@ -22,8 +22,8 @@
                 </div>
                 <button class="slds-button slds-button_brand" onclick={handleCommentApprove}>Submit</button>
             </div>
-            <div><button  class="close" onclick={closeModal}>+</button></div>
-          </div>
+            <div><button class="close" onclick={closeModal}>+</button></div>
+        </div>
     </template>
     <!-- Reject Pop Up Model -->
     <template if:true={popUpReject}>
@@ -34,8 +34,8 @@
                 </div>
                 <button class="slds-button slds-button_brand" onclick={handleCommentReject}>Submit</button>
             </div>
-            <div><button  class="close" onclick={closeModal}>+</button></div>
-          </div>
+            <div><button class="close" onclick={closeModal}>+</button></div>
+        </div>
     </template>
     <!-- Recall Pop Up Model -->
     <template if:true={popUpRecall}>
@@ -46,26 +46,26 @@
                 </div>
                 <button class="slds-button slds-button_brand" onclick={handleCommentRecall}>Submit</button>
             </div>
-            <div><button  class="close" onclick={closeModal}>+</button></div>
-          </div>
+            <div><button class="close" onclick={closeModal}>+</button></div>
+        </div>
     </template>
     <div class="most_outer_box">
-    <div class="heading">List of Events Booked on {FinalDate}</div>
-    <div class="outerDataTable header">
-        <div class="innerDataTable">Subject</div>
-        <div class="innerDataTable">Date</div>
-        <div class="innerDataTable">Start Time</div>
-        <div class="innerDataTable">End Time</div>
-        <div class="innerDataTable">Status</div>
+        <div class="heading">List of Events Booked on {FinalDate}</div>
+        <div class="outerDataTable header">
+            <div class="innerDataTable">Subject</div>
+            <div class="innerDataTable">Date</div>
+            <div class="innerDataTable">Start Time</div>
+            <div class="innerDataTable">End Time</div>
+            <div class="innerDataTable">Status</div>
+        </div>
+        <template for:each={totaldata} for:item="rec">
+            <div key={rec.sub} class="outerDataTable inside">
+                <div class="innerDataTable">{rec.sub}</div>
+                <div class="innerDataTable">{rec.date}</div>
+                <div class="innerDataTable">{rec.starttime}</div>
+                <div class="innerDataTable">{rec.endTime}</div>
+                <div class="innerDataTable">{rec.status}</div>
+            </div>
+        </template>
     </div>
-    <template for:each={totaldata} for:item="rec">
-        <div key={rec.sub} class="outerDataTable inside">
-            <div class="innerDataTable">{rec.sub}</div>
-            <div class="innerDataTable">{rec.date}</div>
-            <div class="innerDataTable">{rec.starttime}</div>
-            <div class="innerDataTable">{rec.endTime}</div>
-            <div class="innerDataTable">{rec.status}</div>
-        </div> 
-    </template>
-</div>
 </template>
